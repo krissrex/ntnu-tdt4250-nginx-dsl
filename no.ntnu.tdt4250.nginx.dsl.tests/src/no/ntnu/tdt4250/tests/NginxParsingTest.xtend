@@ -19,7 +19,7 @@ class NginxParsingTest {
 	ParseHelper<Nginx> parseHelper
 	
 	@Test
-	def void loadModel() {
+	def void parseDefault() {
 		val result = parseHelper.parse('''
 			mycoolsite.com:
 			  root: "/var/www/html"
@@ -30,7 +30,6 @@ class NginxParsingTest {
 			othersite.no:
 			  listen: 443
 			  index: "index.html"
-			  
 		''')
 		Assertions.assertNotNull(result)
 		val errors = result.eResource.errors
