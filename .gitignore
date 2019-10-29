@@ -17,6 +17,8 @@ local.properties
 .loadpath
 .recommenders
 
+.DS_Store
+
 # External tool builders
 .externalToolBuilders/
 
