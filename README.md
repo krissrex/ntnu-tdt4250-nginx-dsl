@@ -28,5 +28,5 @@ Folder name | Description
 
 * https://www.eclipse.org/Xtext/documentation/102_domainmodelwalkthrough.html
 * https://www.ntnu.no/wiki/display/tdt4250/Setup+for+Xtext
-
+* https://gitlab.stud.idi.ntnu.no/TDT4250/examples/tree/master/tdt4250.ra.xtext2
 
