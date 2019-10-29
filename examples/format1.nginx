@@ -1,0 +1,18 @@
+
+default
+	ssl_certificate: /etc/cloudflare/qore.no/certificate.pem
+	ssl_certificate_key: /etc/cloudflare/qore.no/privkey.pem
+	https_redirect: True
+	gzip: True
+
+www.qore.no 
+qore.no
+	port: 3000
+	logname: qore.no.log
+
+beta.qore.no 
+	location: /var/www/qore.no/html
+	template: php7.2
+	logname: beta.qore.no.log
+	404: /var/www/qore.no/html/404.html
+	500: /var/www/qore.no/html/500.html
