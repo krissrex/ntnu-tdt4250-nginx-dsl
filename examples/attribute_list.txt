@@ -1,0 +1,14 @@
+server_name
+root
+index
+error_page
+listen
+ssl_certificate
+ssl_certificate_key
+ssl_dhparam
+include
+return 
+deny
+
+location * {}
+if * {}
