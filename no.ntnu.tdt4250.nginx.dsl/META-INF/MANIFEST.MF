@@ -26,5 +26,6 @@ Export-Package: no.ntnu.tdt4250.nginx.impl,
  no.ntnu.tdt4250.nginx,
  no.ntnu.tdt4250.parser.antlr.internal,
  no.ntnu.tdt4250.generator,
- no.ntnu.tdt4250.validation
+ no.ntnu.tdt4250.validation,
+ no.ntnu.tdt4250.parser.antlr.lexer
 Import-Package: org.apache.log4j

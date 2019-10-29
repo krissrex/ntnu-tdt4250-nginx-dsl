@@ -1,0 +1,9 @@
+mycoolsite.com:
+  template: php5.6
+  error_page: 404 "/404.html"
+  error_page: 500 501 502 "/50x.html"
+
+othersite.no:
+  listen: 443
+  index: "index.html"
+

@@ -21,10 +21,42 @@ class NginxParsingTest {
 	@Test
 	def void loadModel() {
 		val result = parseHelper.parse('''
-			Hello Xtext!
+			mycoolsite.com:
+			  root: "/var/www/html"
+			  template: php5.6
+			  error_page: 404 "/404.html"
+			  error_page: 500 501 502 "/50x.html"
+			  
+			othersite.no:
+			  listen: 443
+			  index: "index.html"
+			  
 		''')
 		Assertions.assertNotNull(result)
 		val errors = result.eResource.errors
-		Assertions.assertTrue(errors.isEmpty, '''Unexpected errors: «errors.join(", ")»''')
+		Assertions.assertTrue(errors.isEmpty, '''Unexpected errors: «errors.join("\n")»''')
+		
+		// Test content of the model 
+		
+		"mycoolsite.com" <=> result.sites.get(0).name
+		"othersite.no" <=> result.sites.get(1).name
+		
+		val coolSite = result.sites.get(0);
+		"php5.6" <=> coolSite.template
+		"/var/www/html" <=> coolSite.root
+		404 <=> coolSite.error_page.get(0).httpCodes.get(0)
+		
+		// For some reason, STRING type keeps its quotes.
+		println(coolSite.error_page.get(0).uri);
+		"/404.html" <=> coolSite.error_page.get(0).uri	
 	}
+	
+	/** maps the <=> 'spaceship' operator to Assert.assertEquals
+	 * 
+	 * https://gitlab.stud.idi.ntnu.no/TDT4250/examples/blob/master/tdt4250.ra.xtext2.tests/src/tdt4250/ra/tests/Rax2ParsingTest.xtend
+	 */
+	private def void operator_spaceship(Object expected, Object actual) {
+		Assertions.assertEquals(expected, actual);
+	}
+	
 }

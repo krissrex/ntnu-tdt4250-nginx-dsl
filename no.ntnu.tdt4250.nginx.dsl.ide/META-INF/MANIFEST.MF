@@ -12,4 +12,5 @@ Require-Bundle: no.ntnu.tdt4250.nginx.dsl,
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)"
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: no.ntnu.tdt4250.ide.contentassist.antlr,
- no.ntnu.tdt4250.ide.contentassist.antlr.internal
+ no.ntnu.tdt4250.ide.contentassist.antlr.internal,
+ no.ntnu.tdt4250.ide.contentassist.antlr.lexer
