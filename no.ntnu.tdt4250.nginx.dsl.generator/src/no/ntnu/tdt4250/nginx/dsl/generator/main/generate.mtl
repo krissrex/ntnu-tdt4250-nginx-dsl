@@ -1,0 +1,10 @@
+[comment encoding = UTF-8 /]
+[module generate('http://www.eclipse.org/emf/2002/Ecore')]
+
+
+[template public generateNginxConfig(anEClass : EClass)]
+[comment @main/]
+[file (anEClass.name, false, 'UTF-8')]
+
+[/file]
+[/template]
