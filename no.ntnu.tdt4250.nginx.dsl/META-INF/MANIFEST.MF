@@ -8,5 +8,23 @@ Bundle-SymbolicName: no.ntnu.tdt4250.nginx.dsl; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext,
  org.eclipse.xtext.xbase,
- org.eclipse.equinox.common;bundle-version="3.5.0"
+ org.eclipse.equinox.common;bundle-version="3.5.0",
+ org.eclipse.emf.ecore,
+ org.eclipse.xtext.xbase.lib;bundle-version="2.14.0",
+ org.eclipse.xtext.util,
+ org.eclipse.emf.common,
+ org.eclipse.xtend.lib;bundle-version="2.14.0",
+ org.antlr.runtime;bundle-version="[3.2.0,3.2.1)"
 Bundle-RequiredExecutionEnvironment: JavaSE-11
+Export-Package: no.ntnu.tdt4250.nginx.impl,
+ no.ntnu.tdt4250.serializer,
+ no.ntnu.tdt4250.services,
+ no.ntnu.tdt4250.parser.antlr,
+ no.ntnu.tdt4250.scoping,
+ no.ntnu.tdt4250.nginx.util,
+ no.ntnu.tdt4250,
+ no.ntnu.tdt4250.nginx,
+ no.ntnu.tdt4250.parser.antlr.internal,
+ no.ntnu.tdt4250.generator,
+ no.ntnu.tdt4250.validation
+Import-Package: org.apache.log4j

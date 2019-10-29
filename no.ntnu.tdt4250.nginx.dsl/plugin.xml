@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+	<extension point="org.eclipse.emf.ecore.generated_package">
+		<package 
+			uri = "http://www.ntnu.no/tdt4250/Nginx"
+			class = "no.ntnu.tdt4250.nginx.NginxPackage"
+			genModel = "model/generated/Nginx.genmodel" />
+	</extension>
+</plugin>
