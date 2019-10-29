@@ -1,4 +1,3 @@
-
 default
 	ssl_certificate: /etc/cloudflare/qore.no/certificate.pem
 	ssl_certificate_key: /etc/cloudflare/qore.no/privkey.pem
