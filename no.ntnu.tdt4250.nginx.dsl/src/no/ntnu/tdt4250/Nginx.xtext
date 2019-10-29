@@ -1,0 +1,9 @@
+grammar no.ntnu.tdt4250.Nginx with org.eclipse.xtext.common.Terminals
+
+generate nginx "http://www.ntnu.no/tdt4250/Nginx"
+
+Model:
+	greetings+=Greeting*;
+	
+Greeting:
+	'Hello' name=ID '!';

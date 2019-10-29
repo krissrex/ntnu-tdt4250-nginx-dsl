@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Automatic-Module-Name: no.ntnu.tdt4250.nginx.dsl.ide
+Bundle-ManifestVersion: 2
+Bundle-Name: no.ntnu.tdt4250.nginx.dsl.ide
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: no.ntnu.tdt4250.nginx.dsl.ide; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: no.ntnu.tdt4250.nginx.dsl,
+ org.eclipse.xtext.ide,
+ org.eclipse.xtext.xbase.ide
+Bundle-RequiredExecutionEnvironment: JavaSE-11
