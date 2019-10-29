@@ -4,7 +4,6 @@
 package no.ntnu.tdt4250.tests
 
 import com.google.inject.Inject
-import no.ntnu.tdt4250.nginx.Model
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.extensions.InjectionExtension
 import org.eclipse.xtext.testing.util.ParseHelper
