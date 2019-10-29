@@ -4,15 +4,36 @@ generate nginx "http://www.ntnu.no/tdt4250/Nginx"
 
 Nginx: 
 	(sites+=Site)*;
+	
+terminal HOST_NAME:
+	ID ('.' ID)*
+;		
 
-terminal SITE_NAME: 
-	('default' | ID ('.' ID)*);
+SiteName: 
+	('default' | HOST_NAME);
 
 Site: 
-	name=SITE_NAME ':' enries+=Entry*;
-	
-terminal VALUE: (INT | ID);
+	name=SiteName ':' entries+=Entry*
+;
 
 Entry:
-	name=ID ':' value=VALUE;
+	'template' ':' template=Template NL & 
+	'root' ':' root=FilePath  NL &
+	'index' ':' index+=FilePath+ NL &
+	'server_name' ':' serverName+=HOST_NAME+ NL &
+	'error_page' ':' error_page+=ErrorPage+ NL &
+	'listen' ':'  NL &
+	'ssl_certificate' ':'  &
+	'ssl_certificate_key' ':'  &
+	'ssl_dhparam' ':'  &
+	'include' ':'  &
+	'return' ':'  &
+	'deny' ':'  
+;
 
+ErrorPage: httpCodes+=INT uri=STRING;
+Template: name='php7.2'|'php5.6';
+terminal Uri: '/' FileName;
+terminal FilePath: '/'? FileName ('/' FileName)* ;
+terminal FileName: ('a'..'z'|'A'..'Z'|'_'|'.') ('a'..'z'|'A'..'Z'|'_'|'0'..'9'|'.')*;
+terminal NL: '\r'* '\n' ('\t' | ' ')+;
