@@ -1,10 +1,17 @@
 [comment encoding = UTF-8 /]
-[module generate('http://www.eclipse.org/emf/2002/Ecore')]
+[module generate('http://www.eclipse.org/emf/2002/Ecore', '/no.ntnu.tdt4250.nginx.dsl/model/generated/Nginx.ecore')]
 
 
-[template public generateNginxConfig(anEClass : EClass)]
+[template public generateNginxConfig(config : Nginx)]
 [comment @main/]
-[file (anEClass.name, false, 'UTF-8')]
+[file ('nginx.conf', false, 'UTF-8')]
+	[for (site: Site | config.sites)]
+# --------------------------------
+# [site.name/]
+# --------------------------------
+server {
 
+}
+	[/for]
 [/file]
 [/template]

@@ -4,7 +4,6 @@
 package no.ntnu.tdt4250.tests
 
 import com.google.inject.Inject
-import no.ntnu.tdt4250.nginx.Model
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.extensions.InjectionExtension
 import org.eclipse.xtext.testing.util.ParseHelper
@@ -20,9 +19,35 @@ class NginxParsingTest {
 	ParseHelper<Nginx> parseHelper
 	
 	@Test
-	def void loadModel() {
+	def void parseDefault() {
 		val result = parseHelper.parse('''
-			Hello Xtext!
+			default: 
+		''')
+		Assertions.assertNotNull(result)
+		val errors = result.eResource.errors
+		Assertions.assertTrue(errors.isEmpty, '''Unexpected errors: «errors.join(", ")»''')
+	}
+	
+	@Test
+	def void parseCustomSiteName() {
+		val result = parseHelper.parse('''
+			www.google.com: 
+		''')
+		Assertions.assertNotNull(result)
+		val errors = result.eResource.errors
+		Assertions.assertTrue(errors.isEmpty, '''Unexpected errors: «errors.join(", ")»''')
+	}
+	
+	@Test
+	def void parseAttributes() {
+		val result = parseHelper.parse('''
+			default: 
+				template: php5.6
+				root: /var/www/
+				index: index.html index.php
+				server_name: google.com
+				error_page: 404 /404.html
+				
 		''')
 		Assertions.assertNotNull(result)
 		val errors = result.eResource.errors
