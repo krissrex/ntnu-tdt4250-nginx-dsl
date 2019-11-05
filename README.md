@@ -23,6 +23,9 @@ Folder name | Description
 6. Write Acceleo generator code using the DSL EMF model
 7. Use the xtext code to load a EMF model instance from the DSL file and hand it to Acceleo
 
+## Grammar
+
+![grammar][docs/grammar.png]
 
 ## Helpful links
 
@@ -30,3 +33,4 @@ Folder name | Description
 * https://www.ntnu.no/wiki/display/tdt4250/Setup+for+Xtext
 * https://gitlab.stud.idi.ntnu.no/TDT4250/examples/tree/master/tdt4250.ra.xtext2
 * Whitespace-aware languages: https://www.eclipse.org/Xtext/documentation/307_special_languages.html
+* Testing https://www.eclipsecon.org/france2015/sites/default/files/slides/presentation.pdf (there is also a video on this)

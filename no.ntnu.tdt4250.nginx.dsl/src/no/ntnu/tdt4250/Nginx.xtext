@@ -4,47 +4,44 @@ import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 generate nginx "http://www.ntnu.no/tdt4250/Nginx"
 
 Nginx: 
-	(sites+=Site)*;
+	sites+=Site*;
 	
-terminal HOST_NAME:
-	ID ('.' ID)*
-;		
-
-SiteName: 
-	('default' | HOST_NAME);
+SiteName: ID ('.' ID)*;
 
 Site: 
-	name=SiteName ':'
+	name=(SiteName|'default')
+	alternativeNames+=SiteName* ':'
 	BEGIN
 		(
-			('template:' template=('php7.2' | 'php5.6'))? &
-			('root:' root=FilePath)? &
-			('index:' (index+=FilePath)+)? &
-			('server_name:' serverName+=HOST_NAME+)? &
-			('error_page:' error_page+=ErrorPage)* &
-			('listen:' listen=INT)?
+			('alternative_names:' )? &
+			('index:' index=STRING)? &
+			('error_page:' errorPage+=ErrorPage)* &
+			(sslCert=SslCert)? &
+			('log_name:' logName=STRING)? &
+			(
+				('port:' port=INT) |
+				('root:' root=FilePath)
+			) &
+			('template:' template=Template)? &
+			('include:' includes+=STRING)* &
+			('https_redirect:' httpsRedirect=('true'|'false'))? &
+			('gzip:' gzip=('true'|'false'))? 
 		)
 	END
 ;
 
+Template: 'php7.2' | 'php5.6';
 
 //TODO: move the fields in ENTRY into Site
-Entry:
-	(
-	'ssl_certificate:'  |
-	'ssl_certificate_key:' |
-	'ssl_dhparam:'  |
-	'include:'  |
-	'return:'  |
-	'deny:'
-	)
+SslCert:
+	'ssl_certificate:' sslCert=FilePath &
+	'ssl_certificate_key:' sslCertKey=FilePath &
+	'ssl_dhparam:' dhParam=FilePath
 ;
 
 ErrorPage: (httpCodes+=INT)+ uri=FilePath;
 
-FilePath returns ecore::EString: STRING;
-terminal NL: '\r'* '\n';
-//terminal FILE_NAME: ('a'..'z'|'A'..'Z'|'_'|'.') ('a'..'z'|'A'..'Z'|'_'|'0'..'9'|'.')*;
+FilePath: STRING;
 
 // Synthetic allows for white-space sensitive languages like python and yaml
 // https://www.eclipse.org/Xtext/documentation/307_special_languages.html

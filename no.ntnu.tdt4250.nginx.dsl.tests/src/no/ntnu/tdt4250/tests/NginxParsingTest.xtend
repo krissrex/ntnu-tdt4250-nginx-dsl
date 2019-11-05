@@ -11,6 +11,8 @@ import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.^extension.ExtendWith
 import no.ntnu.tdt4250.nginx.Nginx
+import org.eclipse.emf.common.util.EList
+import org.eclipse.emf.ecore.resource.Resource
 
 @ExtendWith(InjectionExtension)
 @InjectWith(NginxInjectorProvider)
@@ -20,20 +22,85 @@ class NginxParsingTest {
 	
 	@Test
 	def void parseDefault() {
+		/*
+		 ('template:' template=Template)? &
+			('root:' root=FilePath)? &
+			('index:' index+=FilePath+)? &
+			('error_page:' errorPage+=ErrorPage)* &
+			(sslCert=SslCert)? &
+			('log_name:' logName=STRING)?
+			('port:' port=INT)
+			('include:' includes+=STRING)* &
+			('https_redirect:' httpsRedirect='true'|'false') &
+			('gzip:' gzip='true'|'false') 
+			* 
+			* 
+				'ssl_certificate:' sslCert=FilePath &
+				'ssl_certificate_key:' sslCertKey=FilePath &
+				'ssl_dhparam:' dhParam=FilePath
+		 */
 		val result = parseHelper.parse('''
 			mycoolsite.com:
 			  root: "/var/www/html"
+			  index: "index.html index.php"
 			  template: php5.6
 			  error_page: 404 "/404.html"
 			  error_page: 500 501 502 "/50x.html"
+			  ssl_certificate: "/etc/somepath/cert.pem"
+			  ssl_certificate_key: "/etc/somepath/cert_key.pem"
+			  ssl_dhparam: "/etc/somepath/dhparam.pem"
+			  log_name: "/var/log/nginx/access.log"
+			  include: "fastcgi_params"
+			  https_redirect: true
 			  
-			othersite.no:
-			  listen: 443
+			default
+			othersite.no
+			www.othersite.no:
 			  index: "index.html"
+			  port: 8080
 		''')
 		Assertions.assertNotNull(result)
 		val errors = result.eResource.errors
-		Assertions.assertTrue(errors.isEmpty, '''Unexpected errors: «errors.join("\n")»''')
+		Assertions.assertTrue(errors.isEmpty, '''Unexpected errors: 
+			«errors.toPrettyString»''')
+	}
+	
+	@Test
+	def testFailsWhenBothPortAndRoot() {
+		val result = parseHelper.parse('''
+			mysite.no:
+			  index: "index.html"
+			  port: 8080
+			  root: "/var/www/html"
+		''')
+		
+		1 <=> result.eResource.errors.length
+	}
+	
+	@Test
+	def testDataFromModel() {
+		val result = parseHelper.parse('''
+			mycoolsite.com:
+			  root: "/var/www/html"
+			  index: "index.html index.php"
+			  template: php5.6
+			  error_page: 404 "/404.html"
+			  error_page: 500 501 502 "/50x.html"
+			  ssl_certificate: "/etc/somepath/cert.pem"
+			  ssl_certificate_key: "/etc/somepath/cert_key.pem"
+			  ssl_dhparam: "/etc/somepath/dhparam.pem"
+			  log_name: "/var/log/nginx/access.log"
+			  include: "fastcgi_params"
+			  https_redirect: true
+			  
+			othersite.no
+			www.othersite.no:
+			  index: "index.html"
+			  port: 8080
+		''')
+		Assertions.assertNotNull(result)
+		val errors = result.eResource.errors
+		Assertions.assertTrue(errors.isEmpty, '''Unexpected errors: «toPrettyString(errors)»''')
 		
 		// Test content of the model 
 		
@@ -42,12 +109,15 @@ class NginxParsingTest {
 		
 		val coolSite = result.sites.get(0);
 		"php5.6" <=> coolSite.template
-		"/var/www/html" <=> coolSite.root
-		404 <=> coolSite.error_page.get(0).httpCodes.get(0)
-		
 		// For some reason, STRING type keeps its quotes.
-		println(coolSite.error_page.get(0).uri);
-		"/404.html" <=> coolSite.error_page.get(0).uri	
+		'"/var/www/html"' <=> coolSite.root
+		404 <=> coolSite.errorPage.get(0).httpCodes.get(0)
+		
+		println(coolSite.errorPage.get(0).uri);
+		'"/404.html"' <=> coolSite.errorPage.get(0).uri
+		
+		val otherSite = result.sites.get(1)
+		"www.othersite.no" <=> otherSite.alternativeNames.get(0)
 	}
 	
 	/** maps the <=> 'spaceship' operator to Assert.assertEquals
@@ -56,6 +126,10 @@ class NginxParsingTest {
 	 */
 	private def void operator_spaceship(Object expected, Object actual) {
 		Assertions.assertEquals(expected, actual);
+	}
+	
+	private def String toPrettyString(EList<Resource.Diagnostic> errors) {
+		return errors.map['''«it.line»:«it.column» ->«it.message»   --- «it.toString»'''].join("\n")
 	}
 	
 }
