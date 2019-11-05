@@ -24,6 +24,12 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 
+import com.google.inject.Injector;
+
+import no.ntnu.tdt4250.NginxStandaloneSetup;
+import no.ntnu.tdt4250.nginx.Nginx;
+import no.ntnu.tdt4250.parser.antlr.NginxParser;
+
 /**
  * Entry point of the 'Generate' generation module.
  *
@@ -83,11 +89,16 @@ public class Generate extends AbstractAcceleoGenerator {
      * @throws IOException
      *             This can be thrown in three scenarios : the module cannot be found, it cannot be loaded, or
      *             the model cannot be loaded.
-     * @generated
+     * @generated NOT
      */
     public Generate(URI modelURI, File targetFolder,
             List<? extends Object> arguments) throws IOException {
-        initialize(modelURI, targetFolder, arguments);
+        NginxStandaloneSetup setup = new NginxStandaloneSetup();
+    	Injector injector = setup.createInjectorAndDoEMFRegistration();
+ 
+    	DslFileLoader loader = injector.getInstance(DslFileLoader.class);
+    	Nginx model = loader.loadModel(modelURI);
+        initialize(model, targetFolder, arguments);
     }
 
     /**

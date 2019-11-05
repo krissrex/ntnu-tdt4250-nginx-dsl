@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project default="generate" name="no.ntnu.tdt4250.nginx.dsl.generator">
-    <property name="ECLIPSE_HOME" value="../../../../AppData/Local/Eclipse/eclipse-dsl-2019-06-R-win32-x86_64/eclipse"/>
+    <property name="ECLIPSE_HOME" value="../../../../../../Applications/Eclipse.app/Contents/Eclipse"/>
     <property name="ECLIPSE_WORKSPACE" value="../.."/>
 
     <!-- The classpath with only the dependencies used by the project -->
@@ -30,6 +30,18 @@
         <pathelement location="${ECLIPSE_HOME}/plugins/org.eclipse.emf.codegen.ecore_2.18.0.v20190528-0725.jar"/>
         <pathelement location="${ECLIPSE_HOME}/plugins/org.eclipse.emf.codegen_2.16.0.v20190418-0907.jar"/>
         <pathelement location="${ECLIPSE_HOME}/plugins/com.google.guava_21.0.0.v20170206-1425.jar"/>
+        <pathelement location="${ECLIPSE_HOME}/plugins/org.eclipse.xtext.xbase.lib_2.18.0.v20190528-0016.jar"/>
+        <pathelement location="${ECLIPSE_HOME}/plugins/org.eclipse.xtend.lib_2.18.0.v20190528-0016.jar"/>
+        <pathelement location="${ECLIPSE_HOME}/plugins/org.eclipse.xtend.lib.macro_2.18.0.v20190528-0016.jar"/>
+        <pathelement location="${ECLIPSE_HOME}/plugins/com.google.inject_3.0.0.v201605172100.jar"/>
+        <pathelement location="${ECLIPSE_HOME}/plugins/javax.inject.source_1.0.0.v20091030.jar"/>
+        <pathelement location="${ECLIPSE_HOME}/plugins/org.eclipse.xtext_2.18.0.v20190528-0021.jar"/>
+        <pathelement location="${ECLIPSE_HOME}/plugins/org.antlr.runtime_3.2.0.v201101311130.jar"/>
+        <pathelement location="${ECLIPSE_HOME}/plugins/org.eclipse.emf.mwe.core_1.4.0.jar"/>
+        <pathelement location="${ECLIPSE_HOME}/plugins/org.apache.commons.cli_1.2.0.v201404270220.jar"/>
+        <pathelement location="${ECLIPSE_HOME}/plugins/org.eclipse.emf.mwe2.runtime_2.10.0.jar"/>
+        <pathelement location="${ECLIPSE_HOME}/plugins/org.eclipse.emf.mwe.utils_1.4.0.jar"/>
+        <pathelement location="${ECLIPSE_HOME}/plugins/org.eclipse.xtext.util_2.18.0.v20190528-0021.jar"/>
     </path>
 
     <path id="no.ntnu.tdt4250.nginx.dsl.generator.classpath">

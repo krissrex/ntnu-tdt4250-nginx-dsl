@@ -5,7 +5,7 @@ Bundle-SymbolicName: no.ntnu.tdt4250.nginx.dsl.generator
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: no.ntnu.tdt4250.nginx.dsl.generator.Activator
 Bundle-Vendor: Eclipse Modeling Project
-Require-Bundle: org.eclipse.core.runtime, 
+Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore,
  org.eclipse.emf.ecore.xmi,
  org.eclipse.ocl,
@@ -14,9 +14,15 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.acceleo.model;bundle-version="3.3.0",
  org.eclipse.acceleo.profiler;bundle-version="3.3.0",
  org.eclipse.acceleo.engine;bundle-version="3.3.0",
- com.google.guava
+ com.google.guava,
+ no.ntnu.tdt4250.nginx.dsl;bundle-version="1.0.0",
+ org.eclipse.xtext.xbase.lib,
+ org.eclipse.xtend.lib,
+ org.eclipse.xtend.lib.macro,
+ com.google.inject;bundle-version="3.0.0",
+ javax.inject.source;bundle-version="1.0.0",
+ org.eclipse.xtext;bundle-version="2.18.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Bundle-ActivationPolicy: lazy
 Eclipse-LazyStart: true
 Export-Package: no.ntnu.tdt4250.nginx.dsl.generator.main
-
