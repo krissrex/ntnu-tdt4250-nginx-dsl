@@ -19,24 +19,6 @@ class NginxSslValidatorTest {
 	@Inject extension ValidationTestHelper validationHelper
 
 	@Test
-	def void testFailsInvalidSslCertificate() {
-		val input = '''
-			mysite.com:
-				port: 3000
-				ssl_certificate: "invalid"
-				ssl_certificate_key: "/etc/somepath/cert_key.pem"
-				ssl_dhparam: "/etc/somepath/dhparam.pem"
-		'''
-		val result = input.parse
-		
-		result.assertError(
-			NginxPackage.Literals.SSL_CERT,
-			NginxSslValidator.INVALID_SSL_CERT_PATH,
-			'"invalid" is not a valid file path'
-		)
-	}
-	
-	@Test
 	def void testValidSslCertificate() {
 		val input = '''
 			mysite.com:
@@ -46,7 +28,52 @@ class NginxSslValidatorTest {
 				ssl_dhparam: "/etc/somepath/dhparam.pem"
 		'''
 		val result = input.parse
-		
+
 		result.assertNoErrors
+	}
+	
+	@Test
+	def void testFailsInvalidSslCertificate() {
+		val input = '''
+			mysite.com:
+				port: 3000
+				ssl_certificate: "invalid1"
+				ssl_certificate_key: "invalid2"
+				ssl_dhparam: "invalid3"
+		'''
+		val result = input.parse
+
+		{
+			val certIndex = input.indexOf("ssl_certificate:")
+			result.assertError(
+				NginxPackage.Literals.SSL_CERT,
+				NginxSslValidator.INVALID_SSL_FILE_PATH,
+				input.indexOf('"invalid1"', certIndex),
+				'"invalid1"'.length,
+				'"invalid1" is not a valid absolute file path'
+			)
+		}
+
+		{
+			val certKeyIndex = input.indexOf("ssl_certificate_key:")
+			result.assertError(
+				NginxPackage.Literals.SSL_CERT,
+				NginxSslValidator.INVALID_SSL_FILE_PATH,
+				input.indexOf('"invalid2"', certKeyIndex),
+				'"invalid2"'.length,
+				'"invalid2" is not a valid absolute file path'
+			)
+		}
+
+		{
+			val dhParamIndex = input.indexOf("ssl_dhparam:")
+			result.assertError(
+				NginxPackage.Literals.SSL_CERT,
+				NginxSslValidator.INVALID_SSL_FILE_PATH,
+				input.indexOf('"invalid3"', dhParamIndex),
+				'"invalid3"'.length,
+				'"invalid3" is not a valid absolute file path'
+			)
+		}
 	}
 }
