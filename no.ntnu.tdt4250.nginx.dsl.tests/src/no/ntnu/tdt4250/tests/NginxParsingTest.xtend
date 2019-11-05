@@ -109,12 +109,11 @@ class NginxParsingTest {
 		
 		val coolSite = result.sites.get(0);
 		"php5.6" <=> coolSite.template
-		// For some reason, STRING type keeps its quotes.
-		'"/var/www/html"' <=> coolSite.root
+		'/var/www/html' <=> coolSite.root
 		404 <=> coolSite.errorPage.get(0).httpCodes.get(0)
 		
 		println(coolSite.errorPage.get(0).uri);
-		'"/404.html"' <=> coolSite.errorPage.get(0).uri
+		'/404.html' <=> coolSite.errorPage.get(0).uri
 		
 		val otherSite = result.sites.get(1)
 		"www.othersite.no" <=> otherSite.alternativeNames.get(0)

@@ -1,2 +1,8 @@
-default:
-	index: "halla"
+mywebsite.com
+www.mywebsite.com:
+	port: 3000
+	ssl_certificate: "non"
+	ssl_certificate_key: "/halla"
+	ssl_dhparam: "/etc/lol"
+	error_page: 500 501 "/50x.html"
+	
