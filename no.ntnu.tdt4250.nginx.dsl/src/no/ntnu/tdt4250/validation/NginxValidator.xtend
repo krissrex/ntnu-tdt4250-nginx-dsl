@@ -3,23 +3,66 @@
  */
 package no.ntnu.tdt4250.validation
 
+import no.ntnu.tdt4250.nginx.NginxPackage
+import org.eclipse.xtext.validation.Check
+import no.ntnu.tdt4250.nginx.Site
+import java.util.regex.Pattern
+import java.util.regex.PatternSyntaxException
 
 /**
  * This class contains custom validation rules. 
- *
+ * 
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation
  */
 class NginxValidator extends AbstractNginxValidator {
-	
-//	public static val INVALID_NAME = 'invalidName'
-//
-//	@Check
-//	def checkGreetingStartsWithCapital(Greeting greeting) {
-//		if (!Character.isUpperCase(greeting.name.charAt(0))) {
-//			warning('Name should start with a capital', 
-//					NginxPackage.Literals.GREETING__NAME,
-//					INVALID_NAME)
-//		}
-//	}
-	
+
+	public static val INVALID_NAME = 'no.ntnu.tdt4250.validation.SITE_NAME'
+	public static val INVALID_ROOT = 'no.ntnu.tdt4250.validation.SITE_ROOT'
+
+	@Check
+	def void checkSite(Site site) {
+		checkSiteName(site.name)
+		checkRoot(site.root)
+
+	}
+
+	def boolean checkRegex(String testString, String regexString) {
+		var foundMatch = false;
+		try {
+			var regex = Pattern.compile(regexString);
+			var regexMatcher = regex.matcher(testString);
+			foundMatch = regexMatcher.matches();
+		} catch (PatternSyntaxException ex) {
+			// Syntax error in the regular expression
+			System.out.println(ex.localizedMessage)
+		}
+		return foundMatch
+	}
+
+	def void checkSiteName(String siteName) {
+		val foundMatch = checkRegex(siteName, "^[a-zA-Z0-9-]+\\.[a-zA-Z0-9.-]+$")
+		if (!siteName.equals("default") && (foundMatch == false)) {
+			error(
+				'Name of site: ' + siteName + ' is not valid',
+				NginxPackage.Literals.SITE__NAME,
+				INVALID_NAME
+			)
+		}
+	}
+
+	def void checkRoot(String root) {
+		println("yoyo" + root)
+		if (root !== null) {
+			val foundMatch = checkRegex(root, "^\\/[a-zA-Z0-9-]+([\\/][a-zA-Z0-9-]*)*$")
+			if (foundMatch == false) {
+				error(
+					'Root: ' + root + ' is not valid',
+					NginxPackage.Literals.SITE__ROOT,
+					INVALID_ROOT
+				)
+			}
+		}
+
+	}
+
 }
