@@ -35,12 +35,13 @@ class NginxValidatorTest {
 
 
 	@Test
-	def void testSiteName() {
+	def void testSite() {
 		val input = '''
 			mycoolsite.com:
-			  root: "/var/www/html"
+			  port: 3000
 			  index: "index.html index.php"
-			  template: php5.6
+			  template: php7.2
+			  https_redirect: true
 			  error_page: 404 "/404.html"
 			  error_page: 500 501 502 "/50x.html"
 			  ssl_certificate: "/etc/somepath/cert.pem"
@@ -48,7 +49,6 @@ class NginxValidatorTest {
 			  ssl_dhparam: "/etc/somepath/dhparam.pem"
 			  log_name: "/var/log/nginx/access.log"
 			  include: "fastcgi_params"
-			  https_redirect: true
 
 		'''
 		val result = input.parse
@@ -62,7 +62,8 @@ class NginxValidatorTest {
 					println("WARNING: " + issue.message)
 			}
 		}
-
+		result.assertNoErrors
+		
 	}
 
 
