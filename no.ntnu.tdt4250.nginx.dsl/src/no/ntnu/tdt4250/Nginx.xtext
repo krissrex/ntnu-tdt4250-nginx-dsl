@@ -7,8 +7,12 @@ Nginx:
 	sites+=Site*;
 	
 SiteName: ID ('.' ID)*;
-WildCardedSiteName: (ID | '*') ('.' (ID | '*')*);
+WildCardedSiteName: (ID | '*') ('.' (ID | '*'))*;
 
+// TODO fix port and root??
+// TODO add an include?
+// TODO add reference in itself
+// TODO maybe add location directive? 
 Site: 
 	name=(SiteName|'default')
 	alternativeNames+=WildCardedSiteName* ':'
@@ -29,7 +33,7 @@ Site:
 		)
 	END
 ;
-
+// TODO handle php? als in .mtl 
 Template: 'php7.2' | 'php5.6';
 
 SslCert:
