@@ -1,2 +1,11 @@
-mysite:
-  port: 3000
+mysite.no:
+  root: "/var/www/mysite.no/html"
+  https_redirect: true
+  index: "index.html"
+  template: php7.2
+  log_name: "default.log"
+  error_page: 404 "404.html"
+  error_page: 500 502 503 504 "/50x.html"
+  ssl_certificate: "/etc/cloudflare/mysite.no/certificate.pem"
+  ssl_certificate_key: "/etc/cloudflare/mysite.no/privkey.pem"
+  ssl_dhparam: "/etc/letsencrypt/ssl-dhparams.pem"

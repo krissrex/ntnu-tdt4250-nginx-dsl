@@ -1,5 +1,6 @@
 # ntnu-tdt4250-nginx-dsl
 Nginx config DSL for NTNU course TDT4250
+[![Hits-of-Code](https://hitsofcode.com/github/krissrex/ntnu-tdt4250-nginx-dsl)](https://hitsofcode.com/view/github/krissrex/ntnu-tdt4250-nginx-dsl)
 
 ## Project folders
 
