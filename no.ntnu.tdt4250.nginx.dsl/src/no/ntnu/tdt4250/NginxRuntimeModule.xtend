@@ -3,9 +3,16 @@
  */
 package no.ntnu.tdt4250
 
+import no.ntnu.tdt4250.converter.NginxValueConverter
+import org.eclipse.xtext.conversion.IValueConverterService
 
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
  */
 class NginxRuntimeModule extends AbstractNginxRuntimeModule {
+	
+	override Class<? extends IValueConverterService> bindIValueConverterService() {
+		return NginxValueConverter
+	}
+	
 }

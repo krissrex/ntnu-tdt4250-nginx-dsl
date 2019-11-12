@@ -34,3 +34,4 @@ Folder name | Description
 * https://gitlab.stud.idi.ntnu.no/TDT4250/examples/tree/master/tdt4250.ra.xtext2
 * Whitespace-aware languages: https://www.eclipse.org/Xtext/documentation/307_special_languages.html
 * Testing https://www.eclipsecon.org/france2015/sites/default/files/slides/presentation.pdf (there is also a video on this)
+* terminals vs data types https://zarnekow.blogspot.com/2012/11/xtext-corner-6-data-types-terminals-why.html

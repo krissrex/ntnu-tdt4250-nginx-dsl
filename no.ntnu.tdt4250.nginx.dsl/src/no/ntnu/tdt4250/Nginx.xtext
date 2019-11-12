@@ -13,7 +13,6 @@ Site:
 	alternativeNames+=SiteName* ':'
 	BEGIN
 		(
-			('alternative_names:' )? &
 			('index:' index=STRING)? &
 			('error_page:' errorPage+=ErrorPage)* &
 			(sslCert=SslCert)? &
@@ -39,9 +38,9 @@ SslCert:
 	'ssl_dhparam:' dhParam=FilePath
 ;
 
-ErrorPage: (httpCodes+=INT)+ uri=FilePath;
+ErrorPage: httpCodes+=INT+ uri=FilePath;
 
-FilePath: STRING;
+FilePath returns ecore::EString: STRING;
 
 // Synthetic allows for white-space sensitive languages like python and yaml
 // https://www.eclipse.org/Xtext/documentation/307_special_languages.html

@@ -14,6 +14,7 @@ import java.util.regex.PatternSyntaxException
  * 
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation
  */
+@ComposedChecks(validators = NginxSslValidator )
 class NginxValidator extends AbstractNginxValidator {
 
 	public static val INVALID_NAME = 'no.ntnu.tdt4250.validation.SITE_NAME'
