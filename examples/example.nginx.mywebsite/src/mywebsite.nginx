@@ -1,8 +1,9 @@
 mywebsite.com
 www.mywebsite.com:
 	port: 3000
-	ssl_certificate: "non"
-	ssl_certificate_key: "/halla"
+	ssl_certificate: "/etc/file"
+	ssl_certificate_key: "/etc/file"
 	ssl_dhparam: "/etc/lol"
+	gzip: true
+	https_redirect: true
 	error_page: 500 501 "/50x.html"
-	

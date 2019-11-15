@@ -92,7 +92,7 @@ public class Generate extends AbstractAcceleoGenerator {
      * @generated NOT
      */
     public Generate(URI modelURI, File targetFolder,
-            List<? extends Object> arguments) throws IOException {
+        List<? extends Object> arguments) throws IOException {
         NginxStandaloneSetup setup = new NginxStandaloneSetup();
     	Injector injector = setup.createInjectorAndDoEMFRegistration();
  

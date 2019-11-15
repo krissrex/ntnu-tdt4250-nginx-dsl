@@ -28,8 +28,8 @@ Site:
 			) &
 			('template:' template=Template)? &
 			('include:' includes+=STRING)* &
-			('https_redirect:' httpsRedirect=('true'|'false'))? &
-			('gzip:' gzip=('true'|'false'))? 
+			('https_redirect:' httpsRedirect=OptionalBoolean)? &
+			('gzip:' gzip=OptionalBoolean)? 
 		)
 	END
 ;
@@ -45,6 +45,7 @@ SslCert:
 ErrorPage: httpCodes+=INT+ uri=FilePath;
 
 FilePath returns ecore::EString: STRING;
+OptionalBoolean returns ecore::EBooleanObject: 'true'|'false'|'TRUE'|'FALSE'|'yes'|'no'|'YES'|'NO';
 
 // Synthetic allows for white-space sensitive languages like python and yaml
 // https://www.eclipse.org/Xtext/documentation/307_special_languages.html

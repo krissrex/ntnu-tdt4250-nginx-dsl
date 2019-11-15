@@ -18,5 +18,13 @@ class NginxValueConverter extends DefaultTerminalConverters {
 	def IValueConverter<String> FilePath() {
 		return filePathConverter
 	}
+	
+	@Inject
+	private OptionalBooleanConverter optionalBooleanConverter;
+	
+	@ValueConverter(rule="OptionalBoolean")
+	def IValueConverter<Boolean> OptionalBoolean() {
+		return optionalBooleanConverter;
+	}
 
 }

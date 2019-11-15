@@ -38,8 +38,6 @@ class NginxValidator extends AbstractNginxValidator {
 		checkIndex(site.index)
 		checkLogName(site.logName)
 		checkPort(site.port)
-		checkHttpsRedirect(site.httpsRedirect)
-		checkGzip(site.gzip)
 	}
 
 	def boolean checkRegex(String testString, String regexString) {
@@ -139,28 +137,6 @@ class NginxValidator extends AbstractNginxValidator {
 				'Port: ' + port + ' is not valid. The port is not in the allowed range',
 				NginxPackage.Literals.SITE__PORT,
 				INVALID_PORT
-			)
-		}
-	}
-
-	def checkHttpsRedirect(String redirect) {
-		val foundMatch = checkBoolean(redirect)
-		if (foundMatch == false) {
-			error(
-				'HTTPS Redirect: ' + redirect + ' is not valid',
-				NginxPackage.Literals.SITE__HTTPS_REDIRECT,
-				INVALID_HTTPS_REDIRECT
-			)
-		}
-	}
-
-	def checkGzip(String gzip) {
-		val foundMatch = checkBoolean(gzip)
-		if (foundMatch == false) {
-			error(
-				'gzip: ' + gzip + ' is not valid',
-				NginxPackage.Literals.SITE__GZIP,
-				INVALID_GZIP
 			)
 		}
 	}

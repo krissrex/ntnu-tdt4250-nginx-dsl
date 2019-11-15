@@ -3,10 +3,25 @@
  */
 package no.ntnu.tdt4250.ui.contentassist
 
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor
+import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext
+import org.eclipse.xtext.RuleCall
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
  * on how to customize the content assistant.
  */
 class NginxProposalProvider extends AbstractNginxProposalProvider {
+	
+
+	override complete_OptionalBoolean(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		super.complete_OptionalBoolean(model, ruleCall, context, acceptor)
+		
+		acceptor.accept(createCompletionProposal("true", context))
+		acceptor.accept(createCompletionProposal("false", context))
+		acceptor.accept(createCompletionProposal("yes", context))
+		acceptor.accept(createCompletionProposal("no", context))
+	}
+	
 }
