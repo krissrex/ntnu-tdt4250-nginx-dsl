@@ -26,15 +26,13 @@ Site:
 				('port:' port=INT) |
 				('root:' root=FilePath)
 			) &
-			('template:' template=Template)? &
+			('template:' template=('php7.2' | 'php5.6'))? &
 			('include:' includes+=STRING)* &
 			('https_redirect:' httpsRedirect=OptionalBoolean)? &
 			('gzip:' gzip=OptionalBoolean)? 
 		)
 	END
 ;
-// TODO handle php? als in .mtl 
-Template: 'php7.2' | 'php5.6';
 
 SslCert:
 	'ssl_certificate:' sslCert=FilePath &

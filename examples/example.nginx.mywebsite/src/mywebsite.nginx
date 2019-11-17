@@ -1,6 +1,6 @@
 mywebsite.com
 www.mywebsite.com:
-	port: 3000
+	port: 8080
 	ssl_certificate: "/etc/file"
 	ssl_certificate_key: "/etc/file"
 	ssl_dhparam: "/etc/lol"
@@ -11,4 +11,7 @@ www.mywebsite.com:
 default
 mysite.com
 *.mysite.com:
-	port: 8080
+	root: "/var/www/html"
+	template: php5.6
+	error_page: 500 501 "/50x.html"
+	error_page:404 "/404.html"
