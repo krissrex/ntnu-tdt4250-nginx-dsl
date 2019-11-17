@@ -11,13 +11,14 @@
 # --------------------------------
 server {
 	[servernames(site)/]
-	[if (site.sslCert <> null and isHttpsRedirect(site))]
+	[if (site.sslCert <> null and site.httpsRedirect = true)]
 	# SSL configuration
 	listen ['['/]::[']'/]:443 ssl http2 ipv6only=on;
 	listen 443 ssl http2;
- 
 	[/if]
-	[certificates(site)/]	
+
+	[certificates(site)/]
+
 	[if (hasRoot(site))]
 	root [site.root/];
 
@@ -30,7 +31,11 @@ server {
 	}
 
 	[error_pages(site)/]
-	[/if]	
+	[/if]
+	
+	[if (site.template.startsWith('php'))]
+		[php(site)/]
+	[/if]
 }
 
 # if https redirect
@@ -70,7 +75,11 @@ index index.php index.html index.htm index.nginx-debian.html;
 
 location ~ \.php$ {
 	include snippets/fastcgi-php.conf;
+[if (site.template = 'php5.6')]
+	fastcgi_pass unix:/run/php/php5.6-fpm.sock;
+[elseif (site.template = 'php7.2')]
 	fastcgi_pass unix:/run/php/php7.2-fpm.sock;
+[/if]
 }
 
 [/template]
@@ -96,7 +105,5 @@ location = [errorPage.uri/] {
 [/for]
 
 [/template]
-
-[query public isHttpsRedirect(site : Site) : EBoolean = site.httpsRedirect = 'true' /]
 
 [query public hasRoot(site : Site) : EBoolean = site.root <> null and site.root.size() <> 0 /]

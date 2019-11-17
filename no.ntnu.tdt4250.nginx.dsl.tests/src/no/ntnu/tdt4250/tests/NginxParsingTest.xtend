@@ -128,6 +128,9 @@ class NginxParsingTest {
 		
 		val otherSite = result.sites.get(1)
 		"www.othersite.no" <=> otherSite.alternativeNames.get(0)
+		
+		true <=> coolSite.httpsRedirect
+		null <=> otherSite.httpsRedirect
 	}
 	
 	/** maps the <=> 'spaceship' operator to Assert.assertEquals
