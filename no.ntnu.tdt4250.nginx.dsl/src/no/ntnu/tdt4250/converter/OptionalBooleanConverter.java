@@ -6,8 +6,8 @@ import org.eclipse.xtext.nodemodel.INode;
 
 public class OptionalBooleanConverter extends AbstractToStringConverter<Boolean> {
 
-	protected static final String[] TRUE_VALUES = {"true", "yes"};
-	protected static final String[] FALSE_VALUES = {"false", "no"};
+	public static final String[] TRUE_VALUES = {"true"};
+	public static final String[] FALSE_VALUES = {"false"};
 	
 	
 	@Override

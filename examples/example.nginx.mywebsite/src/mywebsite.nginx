@@ -7,3 +7,8 @@ www.mywebsite.com:
 	gzip: true
 	https_redirect: true
 	error_page: 500 501 "/50x.html"
+
+default
+mysite.com
+*.mysite.com:
+	port: 8080

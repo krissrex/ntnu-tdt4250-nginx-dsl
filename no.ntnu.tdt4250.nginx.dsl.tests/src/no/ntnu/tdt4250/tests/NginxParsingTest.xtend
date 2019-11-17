@@ -66,15 +66,26 @@ class NginxParsingTest {
 	}
 	
 	@Test
-	def testFailsWhenBothPortAndRoot() {
+	def void testFailsWhenBothPortAndRoot() {
 		val result = parseHelper.parse('''
 			mysite.no:
 			  index: "index.html"
 			  port: 8080
 			  root: "/var/www/html"
 		''')
-		
+		Assertions.assertNotNull(result)
 		1 <=> result.eResource.errors.length
+		"no viable alternative at input 'root:'" <=> result.eResource.errors.get(0).message
+	}
+	
+	@Test
+	def void testXtextSucksAndParsesIdAsBoolean() {
+		val result = parseHelper.parse('''
+			true.com:
+				port: 8080
+			''')
+		Assertions.assertNull(result)
+		// true is OptionalBoolean and not SiteName. oops
 	}
 	
 	@Test

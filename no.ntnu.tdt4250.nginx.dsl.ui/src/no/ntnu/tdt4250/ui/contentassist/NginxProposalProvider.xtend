@@ -7,6 +7,10 @@ import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext
 import org.eclipse.xtext.RuleCall
+import no.ntnu.tdt4250.converter.OptionalBooleanConverter
+import org.eclipse.xtext.Assignment
+import no.ntnu.tdt4250.nginx.Site
+import no.ntnu.tdt4250.nginx.Nginx
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -18,10 +22,61 @@ class NginxProposalProvider extends AbstractNginxProposalProvider {
 	override complete_OptionalBoolean(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		super.complete_OptionalBoolean(model, ruleCall, context, acceptor)
 		
-		acceptor.accept(createCompletionProposal("true", context))
-		acceptor.accept(createCompletionProposal("false", context))
-		acceptor.accept(createCompletionProposal("yes", context))
-		acceptor.accept(createCompletionProposal("no", context))
+		OptionalBooleanConverter.TRUE_VALUES.forEach[acceptor.accept(createCompletionProposal(it, context))]
+		OptionalBooleanConverter.FALSE_VALUES.forEach[acceptor.accept(createCompletionProposal(it, context))]		
+	}
+	
+	override completeSite_Name(EObject model, Assignment assignment, ContentAssistContext context,
+		ICompletionProposalAcceptor acceptor
+	) {
+		super.completeSite_Name(model, assignment, context, acceptor)
+		
+		val root = context.rootModel as Nginx
+		if (root !== null) {
+			val isDefaultDefined = root.sites.exists[it.name == 'default' || it.alternativeNames.contains('default')]
+			if (!isDefaultDefined) {
+				acceptor.accept(createCompletionProposal('default', context))
+			}
+		}
+		
+		acceptor.accept(createCompletionProposal('mysite.com', context))
+	}
+	
+	override completeSite_AlternativeNames(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		super.completeSite_AlternativeNames(model, assignment, context, acceptor)
+		
+		if (model instanceof Site) {
+			val name = model.name
+			if (!name.startsWith("www.")) {
+				acceptor.accept(createCompletionProposal('www.'+name, context))
+			}
+		}
+	}
+	
+	override void complete_WildCardedSiteName(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		super.complete_WildCardedSiteName(model, ruleCall, context, acceptor)
+		
+		if (model instanceof Site) {
+			val name = model.name
+			if (!name.startsWith('*.') && !name.startsWith('.')) {
+				acceptor.accept(createCompletionProposal('*.'+name, context))
+				acceptor.accept(createCompletionProposal('.'+name, context))
+			}
+		}
+	}
+	
+	
+	override void completeSite_Port(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		super.completeSite_Port(model, assignment, context, acceptor)
+		acceptor.accept(createCompletionProposal('8080', context))
+		acceptor.accept(createCompletionProposal('3000', context))
+		acceptor.accept(createCompletionProposal('9000', context))
+	}
+	
+	override void complete_FilePath(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		super.complete_FilePath(model,ruleCall, context, acceptor)
+		
+		acceptor.accept(createCompletionProposal('/', context))
 	}
 	
 }

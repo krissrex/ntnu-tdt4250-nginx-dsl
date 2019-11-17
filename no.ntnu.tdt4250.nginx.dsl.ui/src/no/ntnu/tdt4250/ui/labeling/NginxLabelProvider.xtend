@@ -4,8 +4,14 @@
 package no.ntnu.tdt4250.ui.labeling
 
 import com.google.inject.Inject
+import no.ntnu.tdt4250.nginx.Nginx
+import no.ntnu.tdt4250.nginx.Site
+import no.ntnu.tdt4250.nginx.SslCert
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider
+import org.eclipse.jface.viewers.StyledString
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider
+import org.eclipse.jface.viewers.StyledString.Styler
+import org.eclipse.jface.text.contentassist.BoldStylerProvider
 
 /**
  * Provides labels for EObjects.
@@ -28,4 +34,22 @@ class NginxLabelProvider extends DefaultEObjectLabelProvider {
 //	def image(Greeting ele) {
 //		'Greeting.gif'
 //	}
+
+	def text(SslCert ele) {
+		'SSL: ' + ele.sslCert
+	}
+	
+	def text(Nginx ele) {
+		'Nginx config for ' + ele.sites.length + ' site' + (ele.sites.length !== 1 ? 's' : '')
+	}
+	
+	def text(Site ele) {
+		var name = ele.name
+		val isDefault = ele.name == 'default'
+		if (isDefault && !ele.alternativeNames.empty) {
+			name = ele.alternativeNames.get(0)
+		}
+		
+		return name + (isDefault ? ' (default)' : '')
+	}
 }

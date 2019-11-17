@@ -6,8 +6,8 @@ generate nginx "http://www.ntnu.no/tdt4250/Nginx"
 Nginx: 
 	sites+=Site*;
 	
-SiteName: ID ('.' ID)*;
-WildCardedSiteName: (ID | '*') ('.' (ID | '*'))*;
+SiteName returns ecore::EString: ID ('.' ID)*;
+WildCardedSiteName returns ecore::EString: ('*.')? ID ('.' ID)* ('.*')?; // http://nginx.org/en/docs/http/server_names.html#wildcard_names
 
 // TODO fix port and root??
 // TODO add an include?
@@ -45,7 +45,7 @@ SslCert:
 ErrorPage: httpCodes+=INT+ uri=FilePath;
 
 FilePath returns ecore::EString: STRING;
-OptionalBoolean returns ecore::EBooleanObject: 'true'|'false'|'TRUE'|'FALSE'|'yes'|'no'|'YES'|'NO';
+OptionalBoolean returns ecore::EBooleanObject: 'true'|'false';
 
 // Synthetic allows for white-space sensitive languages like python and yaml
 // https://www.eclipse.org/Xtext/documentation/307_special_languages.html
