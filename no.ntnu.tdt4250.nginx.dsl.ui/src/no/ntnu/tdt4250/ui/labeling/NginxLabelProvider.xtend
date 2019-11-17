@@ -8,10 +8,7 @@ import no.ntnu.tdt4250.nginx.Nginx
 import no.ntnu.tdt4250.nginx.Site
 import no.ntnu.tdt4250.nginx.SslCert
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider
-import org.eclipse.jface.viewers.StyledString
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider
-import org.eclipse.jface.viewers.StyledString.Styler
-import org.eclipse.jface.text.contentassist.BoldStylerProvider
 
 /**
  * Provides labels for EObjects.

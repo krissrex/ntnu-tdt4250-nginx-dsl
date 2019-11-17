@@ -3,11 +3,11 @@
  */
 package no.ntnu.tdt4250.validation
 
-import no.ntnu.tdt4250.nginx.NginxPackage
-import org.eclipse.xtext.validation.Check
-import no.ntnu.tdt4250.nginx.Site
 import java.util.regex.Pattern
 import java.util.regex.PatternSyntaxException
+import no.ntnu.tdt4250.nginx.NginxPackage
+import no.ntnu.tdt4250.nginx.Site
+import org.eclipse.xtext.validation.Check
 import org.eclipse.xtext.validation.ComposedChecks
 
 /**
@@ -27,17 +27,22 @@ class NginxValidator extends AbstractNginxValidator {
 	public static val INVALID_HTTPS_REDIRECT = 'no.ntnu.tdt4250.validation.SITE__HTTPS_REDIRECT'
 	public static val INVALID_GZIP = 'no.ntnu.tdt4250.validation.SITE__GZIP'
 
-	public static val String[] PHP_TEMPLATES = #['php7.2', 'php5.6']
+	public static val String[] PROXY_TEMPLATES = #['php7.2', 'php5.6']
 	public static val String[] BOOLEANS = #['true', 'false']
 
 	@Check
 	def void checkSite(Site site) {
 		checkSiteName(site.name)
-		checkRoot(site.root)
-		checkTemplate(site.template)
+		
+		if (site.root !== null) {
+			checkRoot(site.root)
+		} else {
+			checkPort(site.port)		
+		}
+
+		checkTemplate(site.template)		
 		checkIndex(site.index)
 		checkLogName(site.logName)
-		checkPort(site.port)
 	}
 
 	def boolean checkRegex(String testString, String regexString) {
@@ -75,27 +80,27 @@ class NginxValidator extends AbstractNginxValidator {
 	}
 
 	def void checkRoot(String root) {
-		if (root !== null) {
-			val foundMatch = checkRegex(root, "^\\/[a-zA-Z0-9-]+([\\/][a-zA-Z0-9-]*)*$")
-			if (foundMatch == false) {
-				error(
-					'Root: ' + root + ' is not valid',
-					NginxPackage.Literals.SITE__ROOT,
-					INVALID_ROOT
-				)
-			}
+		if (root === null) {
+			error(
+				'Root: ' + root + ' is not valid',
+				NginxPackage.Literals.SITE__ROOT,
+				INVALID_ROOT
+			)
+		}
+		val foundMatch = checkRegex(root, "^\\/[a-zA-Z0-9-]+([\\/][a-zA-Z0-9-]*)*$")
+		if (foundMatch == false) {
+			error(
+				'Root: ' + root + ' is not valid',
+				NginxPackage.Literals.SITE__ROOT,
+				INVALID_ROOT
+			)
 		}
 	}
 
 	def void checkTemplate(String template) {
 		if (template !== null) {
-			var foundMatch = false
-			for (String phpTemplate : PHP_TEMPLATES) {
-				if (phpTemplate == template) {
-					foundMatch = true
-				}
-			}
-			if (foundMatch == false) {
+			var valid = PROXY_TEMPLATES.contains(template);
+			if (!valid) {
 				error(
 					'Template: ' + template + ' is not valid',
 					NginxPackage.Literals.SITE__TEMPLATE,
@@ -134,7 +139,7 @@ class NginxValidator extends AbstractNginxValidator {
 	def void checkPort(int port) {
 		if (!(port >= 1 && port <= 65535)) {
 			error(
-				'Port: ' + port + ' is not valid. The port is not in the allowed range',
+				'Port: ' + port + ' is not valid. The port is not in the allowed range [1, 65535].',
 				NginxPackage.Literals.SITE__PORT,
 				INVALID_PORT
 			)

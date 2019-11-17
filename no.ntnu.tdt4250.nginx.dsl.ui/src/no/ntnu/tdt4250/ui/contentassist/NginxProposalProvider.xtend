@@ -11,6 +11,7 @@ import no.ntnu.tdt4250.converter.OptionalBooleanConverter
 import org.eclipse.xtext.Assignment
 import no.ntnu.tdt4250.nginx.Site
 import no.ntnu.tdt4250.nginx.Nginx
+import no.ntnu.tdt4250.nginx.ErrorPage
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -76,7 +77,22 @@ class NginxProposalProvider extends AbstractNginxProposalProvider {
 	override void complete_FilePath(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		super.complete_FilePath(model,ruleCall, context, acceptor)
 		
-		acceptor.accept(createCompletionProposal('/', context))
+		acceptor.accept(createCompletionProposal('"/"', context))
 	}
+	
+	override void completeSite_ErrorPage(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		super.completeSite_ErrorPage(model, assignment, context, acceptor)
+		
+		if (model instanceof Site) {
+			acceptor.accept(createCompletionProposal('500 501 "/50x.html"', context))		
+			acceptor.accept(createCompletionProposal('404 "/404.html"', context))	
+			
+			if (model.template !== null && model.template.startsWith('php')) {
+				acceptor.accept(createCompletionProposal('500 501 "/50x.php"', context))		
+				acceptor.accept(createCompletionProposal('404 "/404.php"', context))	
+			}	
+		}
+	}
+	
 	
 }

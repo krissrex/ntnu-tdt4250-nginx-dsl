@@ -3,6 +3,9 @@
  */
 package no.ntnu.tdt4250.ui.outline
 
+import no.ntnu.tdt4250.nginx.NginxPackage
+import no.ntnu.tdt4250.nginx.Site
+import org.eclipse.xtext.ui.editor.outline.IOutlineNode
 import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider
 
 /**
@@ -12,4 +15,29 @@ import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider
  */
 class NginxOutlineTreeProvider extends DefaultOutlineTreeProvider {
 
+	def protected void _createChildren(IOutlineNode parentNode, Site site) {
+		val img = imageDispatcher.invoke(site)
+				
+		if (site.root !== null) {
+			createEStructuralFeatureNode(parentNode, site, NginxPackage.Literals.SITE__ROOT, img, 'From: ' + site.root, true)
+		} else {
+			createEStructuralFeatureNode(parentNode, site, NginxPackage.Literals.SITE__PORT, img, 'Proxying to port: ' + site.port, true)
+		}
+		
+		if (site.httpsRedirect == Boolean.TRUE) {
+			createEStructuralFeatureNode(parentNode, site, NginxPackage.Literals.SITE__HTTPS_REDIRECT, img, 'Using HTTPS', true)		
+		}
+		if (site.gzip == Boolean.TRUE) {
+			createEStructuralFeatureNode(parentNode, site, NginxPackage.Literals.SITE__GZIP, img, 'Gzipped', true)		
+		}
+		
+		if (site.sslCert !== null) {
+			createNode(parentNode, site.sslCert)
+		}
+		
+		if (site.errorPage !== null && !site.errorPage.empty) {
+			createEStructuralFeatureNode(parentNode, site, NginxPackage.Literals.SITE__ERROR_PAGE, imageDispatcher.invoke(site.errorPage), 'Error pages', false)
+		}
+	}
+	
 }
