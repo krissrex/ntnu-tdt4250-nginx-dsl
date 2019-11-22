@@ -9,13 +9,15 @@ import no.ntnu.tdt4250.nginx.NginxPackage
 import no.ntnu.tdt4250.nginx.Site
 import org.eclipse.xtext.validation.Check
 import org.eclipse.xtext.validation.ComposedChecks
+import no.ntnu.tdt4250.validation.NginxSslValidator
+import no.ntnu.tdt4250.validation.NginxErrorValidator
 
 /**
  * This class contains custom validation rules. 
  * 
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation
  */
-@ComposedChecks(validators=NginxSslValidator)
+@ComposedChecks(validators = #[NginxSslValidator, NginxErrorValidator])
 class NginxValidator extends AbstractNginxValidator {
 
 	public static val INVALID_NAME = 'no.ntnu.tdt4250.validation.SITE__NAME'
@@ -125,10 +127,14 @@ class NginxValidator extends AbstractNginxValidator {
 
 	def void checkLogName(String logName) {
 		if (logName !== null) {
-			val foundMatch = checkRegex(logName, "^\\/[a-zA-Z0-9-]+([\\/][a-zA-Z0-9-]*)*.log$")
+			// Absolute file path
+			val foundMatch = checkRegex(logName, "^\\/[a-zA-Z0-9-]+([\\/][a-zA-Z0-9-]*)*\\.log$")
+
+			// File name
+			//val foundMatch = checkRegex(logName, "^[a-zA-Z0-9-_.]+\\.log$")
 			if (foundMatch == false) {
 				error(
-					'Log name: ' + logName + ' is not valid',
+					'Log name: ' + logName + ' is not valid. Expected "/**.log"',
 					NginxPackage.Literals.SITE__LOG_NAME,
 					INVALID_LOG_NAME
 				)
