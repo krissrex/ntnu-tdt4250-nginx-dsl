@@ -39,8 +39,9 @@ Nginx config DSL for NTNU course TDT4250.
 
 ## Building
 
-### Maven
+> This project uses [Java 11](https://adoptopenjdk.net/releases.html?variant=openjdk11&jvmVariant=hotspot).  
 
+### Maven
 `mvn clean package`
 
 ### Eclipse
