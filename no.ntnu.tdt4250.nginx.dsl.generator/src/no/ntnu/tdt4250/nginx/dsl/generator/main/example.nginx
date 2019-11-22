@@ -2,12 +2,9 @@ INCLUDE "default.nginx"
 
 mysite.no from site.no:
   root: "/var/www"
-  https_redirect: true
   index: "index.html"
-  template: php7.2
-  log_name: "mysite"
+  log_name: "/var/log/mysite.log"
   error_page: 404 "404.html"
   error_page: 500 502 503 504 "/50x.html"
-  ssl_certificate: "/etc/cloudflare/mysite.no/certificate.pem"
-  ssl_certificate_key: "/etc/cloudflare/mysite.cno/privkey.pem"
-  ssl_dhparam: "/etc/letsencrypt/ssl-dhparams.pem"
+  https_redirect: true
+  template: php7.2 

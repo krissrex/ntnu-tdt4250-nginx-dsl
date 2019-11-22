@@ -5,20 +5,27 @@
 [template public generateNginxConfig(config : Nginx)]
 [comment @main/]
 [for (site: Site | config.sites)]
-	[file (site.name.concat('.conf'), false, 'UTF-8')]
+	[generateSite(site)/]
+[/for]
+[/template]
+
+[template public generateSite(site: Site)]
+[file (site.name.concat('.conf'), false, 'UTF-8')]
 # --------------------------------
 # GENERATED [site.name/]
+[if (inherits(site))]
+# INHERITED FROM [site.inherits.name /]
+[/if]
 # --------------------------------
 server {
 	[servernames(site)/]
-	[if (site.sslCert <> null and site.httpsRedirect = true)]
+	[if (getSSLCert(site) <> null and getHTTPSRedirect(site) = true)]
 	# SSL configuration
 	listen ['['/]::[']'/]:443 ssl http2 ipv6only=on;
 	listen 443 ssl http2;
+
 	[/if]
-
 	[certificates(site)/]
-
 	[if (hasRoot(site))]
 	root [site.root/];
 
@@ -32,18 +39,22 @@ server {
 
 	[error_pages(site)/]
 	[/if]
-	
-	[if (site.template.startsWith('php'))]
-		[php(site)/]
+	[if (getTemplate(site) <> null and getTemplate(site).startsWith('php'))]
+	[php(site)/]
 	[/if]
 }
 
+
+[if (getHTTPSRedirect(site))]
 # if https redirect
 [ssl_redirect(site)/]
-	[/file]
-[/for]
-[/template]
+[/if]
+[/file]
 
+[if inherits(site)]
+[generateSite(site.inherits)/]
+[/if]
+[/template]
 
 [template public ssl_redirect(site: Site)]
 server {
@@ -60,11 +71,12 @@ server {
 [/template]
 
 [template public certificates(site: Site)]
-[if (site.sslCert <> null)]
-ssl_certificate [site.sslCert.sslCert/];
-ssl_certificate_key [site.sslCert.sslCertKey/];
+[if (getSSLCert(site) <> null)]
+ssl_certificate [getSSLCert(site).sslCert/];
+ssl_certificate_key [getSSLCert(site).sslCertKey/];
 include /etc/letsencrypt/options-ssl-nginx.conf;
-ssl_dhparam [site.sslCert.dhParam/];
+ssl_dhparam [getSSLCert(site).dhParam/];
+
 [/if]
 [/template]
 
@@ -75,9 +87,9 @@ index index.php index.html index.htm index.nginx-debian.html;
 
 location ~ \.php$ {
 	include snippets/fastcgi-php.conf;
-[if (site.template = 'php5.6')]
+[if (getTemplate(site) = 'php5.6')]
 	fastcgi_pass unix:/run/php/php5.6-fpm.sock;
-[elseif (site.template = 'php7.2')]
+[elseif (getTemplate(site) = 'php7.2')]
 	fastcgi_pass unix:/run/php/php7.2-fpm.sock;
 [/if]
 }
@@ -95,7 +107,7 @@ server_name: [alternative/];
 
 [template public error_pages(site: Site)]
 # error pages
-[for (errorPage: ErrorPage | site.errorPage)]
+[for (errorPage: ErrorPage | getErrorPages(site))]
 error_page [for (err: Integer | errorPage.httpCodes)][err/] [/for][errorPage.uri/];
 location = [errorPage.uri/] {
 	root [site.root/];
@@ -107,3 +119,30 @@ location = [errorPage.uri/] {
 [/template]
 
 [query public hasRoot(site : Site) : EBoolean = site.root <> null and site.root.size() <> 0 /]
+[query public getErrorPages(site : Site) : OrderedSet(ErrorPage) = 
+	if inherits(site)
+	then getErrorPages(site.inherits)->addAll(site.errorPage)
+	else site.errorPage
+	endif 
+/]
+[query public inherits(site : Site) : EBoolean = site.inherits <> null /]
+[query public getTemplate(site : Site) : EString = 
+	if site.template = null and inherits(site)
+	then getTemplate(site.inherits)
+	else site.template
+	endif
+/]
+[query public getHTTPSRedirect(site: Site) : EBoolean = 
+	if site.httpsRedirect <> true and inherits(site) 
+	then getHTTPSRedirect(site.inherits) 
+	else site.httpsRedirect
+	endif
+/]
+[query public getSSLCert(site: Site) : SslCert = 
+	if site.sslCert = null and inherits(site)
+	then getSSLCert(site.inherits)
+	else site.sslCert
+	endif
+/]
+
+
