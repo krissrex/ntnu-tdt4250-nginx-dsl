@@ -9,13 +9,15 @@ import no.ntnu.tdt4250.nginx.NginxPackage
 import no.ntnu.tdt4250.nginx.Site
 import org.eclipse.xtext.validation.Check
 import org.eclipse.xtext.validation.ComposedChecks
+import no.ntnu.tdt4250.validation.NginxSslValidator
+import no.ntnu.tdt4250.validation.NginxErrorValidator
 
 /**
  * This class contains custom validation rules. 
  * 
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation
  */
-@ComposedChecks(validators=NginxSslValidator)
+@ComposedChecks(validators = #[NginxSslValidator, NginxErrorValidator])
 class NginxValidator extends AbstractNginxValidator {
 
 	public static val INVALID_NAME = 'no.ntnu.tdt4250.validation.SITE__NAME'
