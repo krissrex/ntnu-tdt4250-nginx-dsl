@@ -6,15 +6,16 @@ Nginx config DSL for NTNU course TDT4250
 
 ## Project folders
 
-| Folder name | Description                                                                                           |
-| ----------- | ----------------------------------------------------------------------------------------------------- |
-| .generator  | Acceleo model-to-text                                                                                 |
-| .dsl        | The grammar definition and all language-specific components (parser, lexer, linker, validation, etc.) |
-| .ide        | Platform-independent IDE functionality (e.g. services for content assist)                             |
-| .target     | no idea, xtext. Possibly maven stuff.                                                                 |
-| .tests      | xtext tests                                                                                           |
-| .ui         | xtext ui                                                                                              |
-| .ui.tests   | Unit tests for the Eclipse editor                                                                     |
+| Folder name   | Description                                                                                           |
+| ------------- | ----------------------------------------------------------------------------------------------------- |
+| .generator    | Acceleo model-to-text                                                                                 |
+| .generator.ui | Acceleo Launcher UI project                                                                        |
+| .dsl          | The grammar definition and all language-specific components (parser, lexer, linker, validation, etc.) |
+| .ide          | Platform-independent IDE functionality (e.g. services for content assist)                             |
+| .target       | Target platform configurations                                                                        |
+| .tests        | xtext tests                                                                                           |
+| .ui           | xtext ui                                                                                              |
+| .ui.tests     | Unit tests for the Eclipse editor                                                                     |
 
 ## Workflow
 
@@ -35,13 +36,34 @@ This is the xtext grammar that will be used to generate the Ecore model:
 
 This is the model generated from the xtext grammar:
 
-<img src="./docs/ecore-model.png" alt="ecoremodel" width="500"/>
+<img src="./docs/model.png" alt="ecoremodel" width="500"/>
 
-The model consists of the main `Nginx` consisting of any number of sites. The sites themselves contain a number of attributes, and two EClasses: `SSlCert` and `ErrorPage`.
+The model consists of the main `Nginx` consisting of any number of sites. The sites themselves contain a number of attributes, and two EClasses: `SslCert` and `ErrorPage`.
 
 The sites can have several `alternative names` and several `error pages`. The error pages contain a list of `error codes` that link to a specific `uri`. Each site has a `SSL Certifiate` that can be reused for other domains or subdomains.
 
-## Conversion
+The model also keeps track of other referenced nginx-files in the includes attributes. All sites in those files can be referenced by inheriting from them.
+
+## Converting .nginx to .conf
+
+1. Right click the `GenerateNginx.mwe2` inside `no.ntnu.tdt4250.nginx.dsl` and select `Run as -> MWE2 Workflow`
+2. Right click the `generate.mtl` inside `no.ntnu.tdt4250.nginx.dsl.generator` and select `Run Configurations...`. Make sure the `.mtl` is updated. If it shows an error, change something (like add a space) and save again to refresh it. Use the following run coniguration:
+
+<img src="./docs/run-config.png" alt="runconfig" width="500"/>
+
+3. You can change the `example.nginx` to whatever `.nginx` file you want. The result is shown below:
+
+[INSERT IMAGE OF BEFORE AND AFTER CONVERSION]
+
+## Writing new .nginx files
+
+To write new `.nginx` files you want to utilize the features of xtext such as autocompletion and error handling. This is done by starting a new eclipse project.
+
+1. Right click the `no.ntnu.tdt4250.nginx.dsl.ui` project and select `Run as -> Eclipse Application`
+2. Create a new Java Project
+3. Create `.nginx` files and enjoy the autocomplate and validation inside the editor
+
+<img src="./docs/nginx-ide.png" alt="nginx-ide"/>
 
 ## Tests
 
