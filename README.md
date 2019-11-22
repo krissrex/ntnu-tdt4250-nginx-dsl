@@ -32,7 +32,7 @@ To start the IDE for writing DSL:
 4. Create a `.nginx` file
 5. Start writing.
 
-> An explanation with screenshots can be found [furhter down](#writing-new-nginx-files)
+> An explanation with screenshots can be found [further down](#writing-new-nginx-files)
 
 To generate a config:
 
