@@ -53,7 +53,10 @@ The model also keeps track of other referenced nginx-files in the includes attri
 
 3. You can change the `example.nginx` to whatever `.nginx` file you want. The result is shown below:
 
-[INSERT IMAGE OF BEFORE AND AFTER CONVERSION]
+![docs/screenshot_simple.png](docs/screenshot_simple.png)
+
+![docs/screenshot_simple.png](docs/screenshot_simple.png)
+
 
 ## Writing new .nginx files
 
