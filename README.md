@@ -11,7 +11,7 @@ Nginx config DSL for NTNU course TDT4250
 | .generator  | Acceleo model-to-text                                                                                 |
 | .dsl        | The grammar definition and all language-specific components (parser, lexer, linker, validation, etc.) |
 | .ide        | Platform-independent IDE functionality (e.g. services for content assist)                             |
-| .target     | no idea, xtext. Possibly maven stuff.                                                                 |
+| .target     | Target platform configurations                                                                        |
 | .tests      | xtext tests                                                                                           |
 | .ui         | xtext ui                                                                                              |
 | .ui.tests   | Unit tests for the Eclipse editor                                                                     |
