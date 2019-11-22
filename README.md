@@ -10,27 +10,23 @@ Nginx config DSL for NTNU course TDT4250.
 - Jonas Geschke
 
 ---
-
+<!-- npx doctoc README.md -->
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**
 
-- [Semester project - TDT4250: Advanced Software Design](#semester-project---tdt4250-advanced-software-design)
-      - [Participants:](#participants)
-  - [Building](#building)
-    - [Maven](#maven)
-    - [Eclipse](#eclipse)
-  - [Running](#running)
+- [Development](#development)
   - [Project folders](#project-folders)
   - [Workflow](#workflow)
   - [Grammar](#grammar)
   - [Ecore Model](#ecore-model)
-  - [Converting .nginx to .conf](#converting-nginx-to-conf)
-  - [Writing new .nginx files](#writing-new-nginx-files)
+  - [Validators](#validators)
   - [Tests](#tests)
-    - [Validators](#validators)
     - [Running the tests](#running-the-tests)
   - [Helpful links](#helpful-links)
+- [Usage](#usage)
+  - [Converting .nginx to .conf](#converting-nginx-to-conf)
+  - [Writing new .nginx files](#writing-new-nginx-files)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -77,7 +73,9 @@ To generate a config:
 
 ---
 
-## Project folders
+## Development
+
+### Project folders
 
 | Folder name   | Description                                                                                           |
 | ------------- | ----------------------------------------------------------------------------------------------------- |
@@ -90,7 +88,7 @@ To generate a config:
 | .ui           | xtext ui                                                                                              |
 | .ui.tests     | Unit tests for the Eclipse editor                                                                     |
 
-## Workflow
+### Workflow
 
 1. Write the xtext grammar and EMF in `.dsl/src/*/Nginx.xtext`
 2. Generate language artifacts by running the `.dsl/src/*/GenerateNginx.mwe2` workflow (right-click)
@@ -99,13 +97,13 @@ To generate a config:
 5. Write Acceleo generator code using the DSL EMF model
 6. Use the xtext code to load a EMF model instance from the DSL file and hand it to Acceleo
 
-## Grammar
+### Grammar
 
 This is the xtext grammar that will be used to generate the Ecore model:
 
 ![grammar](docs/grammar.png)
 
-## Ecore Model
+### Ecore Model
 
 This is the model generated from the xtext grammar:
 
@@ -117,35 +115,17 @@ The sites can have several `alternative names` and several `error pages`. The er
 
 The model also keeps track of other referenced nginx-files in the includes attributes. All sites in those files can be referenced by inheriting from them.
 
-## Converting .nginx to .conf
+### Validators
 
-1. Right click the `GenerateNginx.mwe2` inside `no.ntnu.tdt4250.nginx.dsl` and select `Run as -> MWE2 Workflow`
-2. Right click the `generate.mtl` inside `no.ntnu.tdt4250.nginx.dsl.generator` and select `Run Configurations...`. Make sure the `.mtl` is updated. If it shows an error, change something (like add a space) and save again to refresh it. Use the following run coniguration:
+There are three validators `NginxValidator`, `NginxSslValidator` and `NginxErrorValidator` corresponding to the model: `Site`, `SslCert` and `ErrorPage`.
 
-<img src="./docs/run-config.png" alt="runconfig"/>
+The main validator uses "composed checks" to include the two others:
 
-3. You can change the `example.nginx` to whatever `.nginx` file you want. The results are shown below:
+`@ComposedChecks(validators = #[NginxSslValidator, NginxErrorValidator])`
 
-![docs/screenshot_simple.png](docs/screenshot_simple.png)
+These validators then validate the model and throws an error if something is incorrect in the input. Every field in the model is checked and validated - mostly through regex.
 
-A simple conversion from our YAML-based language on the left to a working Nginx config file on the right. 
-
-![docs/screenshot_inherit.png](docs/screenshot_inherit.png)
-
-A conversion with inheritance, where all the configurations from the previous example is applied unless they are overwritten.
-
-
-## Writing new .nginx files
-
-To write new `.nginx` files you want to utilize the features of xtext such as autocompletion and error handling. This is done by starting a new eclipse project.
-
-1. Right click the `no.ntnu.tdt4250.nginx.dsl.ui` project and select `Run as -> Eclipse Application`
-2. Create a new Java Project
-3. Create `.nginx` files and enjoy the autocomplate and validation inside the editor
-
-<img src="./docs/nginx-ide.png" alt="nginx-ide"/>
-
-## Tests
+### Tests
 
 The tests are located in `no.ntnu.tdt4250.tests`. For each object in the model `Site`, `SslCert` and `ErrorPage`, there is a corresponding `.xtend` test file. In addition to this, there is a `Parsing` test and a `UnquotedStringValueConverter` test.
 
@@ -168,25 +148,13 @@ mycoolsite.com:
 
 and parses it using the `ParseHelper`. The resourceValidator then validates the result using the validators implemented in `no.ntnu.tdt4250.nginx.dsl`. Any issues (errors or warnings) are printed to the console in addition to failing the test.
 
-### Validators
-
-There are three validators `NginxValidator`, `NginxSslValidator` and `NginxErrorValidator` corresponding to the model: `Site`, `SslCert` and `ErrorPage`.
-
-The main validator uses "composed checks" to include the two others:
-
-`@ComposedChecks(validators = #[NginxSslValidator, NginxErrorValidator])`
-
-These validators then validate the model and throws an error if something is incorrect in the input. Every field in the model is checked and validated - mostly through regex.
-
-### Running the tests
+#### Running the tests
 
 Right click on the `no.ntnu.tdt4250.tests` project and select `Run as -> JUnit Test`
 
 Alternatively, use `mvn test` (or `mvn --offline test` to skip downloading dependencies/p2 indexes)
 
----
-
-## Helpful links
+### Helpful links
 
 - Official Xtext docs https://www.eclipse.org/Xtext/documentation/102_domainmodelwalkthrough.html
 - NTNU wiki https://www.ntnu.no/wiki/display/tdt4250/Setup+for+Xtext
@@ -194,3 +162,36 @@ Alternatively, use `mvn test` (or `mvn --offline test` to skip downloading depen
 - Whitespace-aware languages: https://www.eclipse.org/Xtext/documentation/307_special_languages.html
 - Testing Xtext Languages https://www.eclipsecon.org/france2015/sites/default/files/slides/presentation.pdf (there is also a video on this)
 - Terminals VS data types https://zarnekow.blogspot.com/2012/11/xtext-corner-6-data-types-terminals-why.html
+
+
+---
+
+## Usage
+### Converting .nginx to .conf
+
+1. Right click the `GenerateNginx.mwe2` inside `no.ntnu.tdt4250.nginx.dsl` and select `Run as -> MWE2 Workflow`
+2. Right click the `generate.mtl` inside `no.ntnu.tdt4250.nginx.dsl.generator` and select `Run Configurations...`. Make sure the `.mtl` is updated. If it shows an error, change something (like add a space) and save again to refresh it. Use the following run coniguration:
+
+<img src="./docs/run-config.png" alt="runconfig"/>
+
+3. You can change the `example.nginx` to whatever `.nginx` file you want. The results are shown below:
+
+![docs/screenshot_simple.png](docs/screenshot_simple.png)
+
+A simple conversion from our YAML-based language on the left to a working Nginx config file on the right. 
+
+![docs/screenshot_inherit.png](docs/screenshot_inherit.png)
+
+A conversion with inheritance, where all the configurations from the previous example is applied unless they are overwritten.
+
+
+### Writing new .nginx files
+
+To write new `.nginx` files you want to utilize the features of xtext such as autocompletion and error handling. This is done by starting a new eclipse project.
+
+1. Right click the `no.ntnu.tdt4250.nginx.dsl.ui` project and select `Run as -> Eclipse Application`
+2. Create a new Java Project
+3. Create `.nginx` files and enjoy the autocomplate and validation inside the editor
+
+<img src="./docs/nginx-ide.png" alt="nginx-ide"/>
+
