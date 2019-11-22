@@ -13,7 +13,7 @@ Nginx config DSL for NTNU course TDT4250.
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+**Table of Contents**
 
 - [Semester project - TDT4250: Advanced Software Design](#semester-project---tdt4250-advanced-software-design)
       - [Participants:](#participants)
