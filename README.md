@@ -27,7 +27,21 @@ Nginx config DSL for NTNU course TDT4250
 
 ## Grammar
 
+This is the xtext grammar that will be used to generate the Ecore model:
+
 ![grammar](docs/grammar.png)
+
+## Ecore Model
+
+This is the model generated from the xtext grammar:
+
+![ecore-model](docs/ecore-model.png)
+
+The model consists of the main `Nginx` consisting of any number of sites. The sites themselves contain a number of attributes, and two EClasses: `SSlCert` and `ErrorPage`.
+
+The sites can have several `alternative names` and several `error pages`. The error pages contain a list of `error codes` that link to a specific `uri`. Each site has a `SSL Certifiate` that can be reused for other domains or subdomains.
+
+## Conversion
 
 ## Tests
 
