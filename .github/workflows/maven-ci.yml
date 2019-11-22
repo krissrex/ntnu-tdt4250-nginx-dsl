@@ -18,6 +18,6 @@ jobs:
         # An explicit key for restoring and saving the cache
         key: ${{ runner.os }}-${{ hashFiles('**/pom.xml') }}
     - name: GitHub Action for Maven
-      uses: krissrex/action-maven-cli@1.1.0-jre11
+      uses: krissrex/action-maven-cli@1.1.1-jre11
       with:
         args: clean test
