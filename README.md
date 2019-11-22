@@ -32,6 +32,8 @@ To start the IDE for writing DSL:
 4. Create a `.nginx` file
 5. Start writing.
 
+> An explanation with screenshots can be found [furhter down](#writing-new-nginx-files)
+
 To generate a config:
 
 1. Build in eclipse
@@ -45,6 +47,8 @@ To generate a config:
   5. Configuration > Runner: `Java Application`
 5. Apply and Run
   * If it says the configuration does not exist, just try to run it again
+
+> An explanation with screenshots can be found [further down](#converting-nginx-to-conf)
 
 ---
 
