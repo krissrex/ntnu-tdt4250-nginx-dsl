@@ -54,7 +54,7 @@ The model also keeps track of other referenced nginx-files in the includes attri
 1. Right click the `GenerateNginx.mwe2` inside `no.ntnu.tdt4250.nginx.dsl` and select `Run as -> MWE2 Workflow`
 2. Right click the `generate.mtl` inside `no.ntnu.tdt4250.nginx.dsl.generator` and select `Run Configurations...`. Make sure the `.mtl` is updated. If it shows an error, change something (like add a space) and save again to refresh it. Use the following run coniguration:
 
-<img src="./docs/run-config.png" alt="runconfig" width="500"/>
+<img src="./docs/run-config.png" alt="runconfig"/>
 
 3. You can change the `example.nginx` to whatever `.nginx` file you want. The result is shown below:
 
