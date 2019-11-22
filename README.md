@@ -55,7 +55,7 @@ The model also keeps track of other referenced nginx-files in the includes attri
 
 ![docs/screenshot_simple.png](docs/screenshot_simple.png)
 
-![docs/screenshot_simple.png](docs/screenshot_simple.png)
+![docs/screenshot_inherit.png](docs/screenshot_inherit.png)
 
 
 ## Writing new .nginx files
