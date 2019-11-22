@@ -17,7 +17,7 @@ import no.ntnu.tdt4250.validation.NginxErrorValidator
  * 
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation
  */
-@ComposedChecks(validators = #[NginxSslValidator, NginxErrorValidator])
+@ComposedChecks(validators = #[NginxSslValidator, NginxErrorValidator, NginxIncludeValidator])
 class NginxValidator extends AbstractNginxValidator {
 
 	public static val INVALID_NAME = 'no.ntnu.tdt4250.validation.SITE__NAME'
