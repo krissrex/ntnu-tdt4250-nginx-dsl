@@ -1,7 +1,0 @@
-site.no :
-  	root: "/var/www/"
-  	ssl_certificate: "/etc/cloudflare/site.no/certificate.pem"
-  	ssl_certificate_key: "/etc/cloudflare/site.no/privkey.pem"
-  	ssl_dhparam: "/etc/letsencrypt/ssl-dhparams.pem"
-  	error_page: 202 "/202.html"
-  	

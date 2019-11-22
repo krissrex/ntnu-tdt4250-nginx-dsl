@@ -1,4 +1,4 @@
-INCLUDE "default.nginx"
+INCLUDE "site.no.nginx"
 
 mysite.no from site.no:
   root: "/var/www"
@@ -8,3 +8,4 @@ mysite.no from site.no:
   error_page: 500 502 503 504 "/50x.html"
   https_redirect: true
   template: php7.2 
+  gzip: true

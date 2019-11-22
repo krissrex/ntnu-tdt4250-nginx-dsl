@@ -42,9 +42,10 @@ server {
 	[if (getTemplate(site) <> null and getTemplate(site).startsWith('php'))]
 	[php(site)/]
 	[/if]
-	
-	[comment TODO gzip, include, index /]
 
+	[if (getGzip(site) <> null and getGzip(site) = true)]
+	[gzipconfigs(site)/]
+	[/if]
 }
 
 
@@ -121,6 +122,17 @@ location = [errorPage.uri/] {
 
 [/template]
 
+[template public gzipconfigs(site: Site)]
+gzip on;
+gzip_disable "msie6";
+gzip_vary on;
+gzip_proxied any;
+gzip_comp_level 6;
+gzip_buffers 16 8k;
+gzip_http_version 1.1;
+gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript video/mp4 image/png image/gif image/jpeg binary/octet-stream;
+[/template]
+
 [query public hasRoot(site : Site) : EBoolean = site.root <> null and site.root.size() <> 0 /]
 [query public getErrorPages(site : Site) : OrderedSet(ErrorPage) = 
 	if inherits(site)
@@ -147,5 +159,9 @@ location = [errorPage.uri/] {
 	else site.sslCert
 	endif
 /]
-
-
+[query public getGzip(site: Site) : EBoolean = 
+	if site.gzip <> true and inherits(site) 
+	then getGzip(site.inherits) 
+	else site.gzip
+	endif
+/]
