@@ -4,18 +4,25 @@ import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 generate nginx "http://www.ntnu.no/tdt4250/Nginx"
 
 Nginx: 
+	includes+=Include* & 
 	sites+=Site*;
+	
 	
 SiteName returns ecore::EString: ID ('.' ID)*;
 WildCardedSiteName returns ecore::EString: ('*.')? ID ('.' ID)* ('.*')?; // http://nginx.org/en/docs/http/server_names.html#wildcard_names
 
-// TODO fix port and root??
+Include:
+    'INCLUDE' importURI=STRING
+;
+
 // TODO add an include?
 // TODO add reference in itself
 // TODO maybe add location directive? 
 Site: 
 	name=(SiteName|'default')
-	alternativeNames+=WildCardedSiteName* ':'
+	alternativeNames+=WildCardedSiteName* 
+	('from' inherits=[Site | SiteName])?
+	':'
 	BEGIN
 		(
 			('index:' index=STRING)? &
