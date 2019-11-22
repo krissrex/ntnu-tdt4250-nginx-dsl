@@ -99,11 +99,15 @@ The model also keeps track of other referenced nginx-files in the includes attri
 
 <img src="./docs/run-config.png" alt="runconfig"/>
 
-3. You can change the `example.nginx` to whatever `.nginx` file you want. The result is shown below:
+3. You can change the `example.nginx` to whatever `.nginx` file you want. The results are shown below:
 
 ![docs/screenshot_simple.png](docs/screenshot_simple.png)
 
+A simple conversion from our YAML-based language on the left to a working Nginx config file on the right. 
+
 ![docs/screenshot_inherit.png](docs/screenshot_inherit.png)
+
+A conversion with inheritance, where all the configurations from the previous example is applied unless they are overwritten.
 
 
 ## Writing new .nginx files
@@ -159,9 +163,9 @@ Alternatively, use `mvn test` (or `mvn --offline test` to skip downloading depen
 
 ## Helpful links
 
-- https://www.eclipse.org/Xtext/documentation/102_domainmodelwalkthrough.html
-- https://www.ntnu.no/wiki/display/tdt4250/Setup+for+Xtext
-- https://gitlab.stud.idi.ntnu.no/TDT4250/examples/tree/master/tdt4250.ra.xtext2
+- Official Xtext docs https://www.eclipse.org/Xtext/documentation/102_domainmodelwalkthrough.html
+- NTNU wiki https://www.ntnu.no/wiki/display/tdt4250/Setup+for+Xtext
+- TDT4250 example repo https://gitlab.stud.idi.ntnu.no/TDT4250/examples/tree/master/tdt4250.ra.xtext2
 - Whitespace-aware languages: https://www.eclipse.org/Xtext/documentation/307_special_languages.html
-- Testing https://www.eclipsecon.org/france2015/sites/default/files/slides/presentation.pdf (there is also a video on this)
-- terminals vs data types https://zarnekow.blogspot.com/2012/11/xtext-corner-6-data-types-terminals-why.html
+- Testing Xtext Languages https://www.eclipsecon.org/france2015/sites/default/files/slides/presentation.pdf (there is also a video on this)
+- Terminals VS data types https://zarnekow.blogspot.com/2012/11/xtext-corner-6-data-types-terminals-why.html
