@@ -10,11 +10,16 @@ Nginx config DSL for NTNU course TDT4250.
 - Jonas Geschke
 
 ---
+
 <!-- npx doctoc README.md -->
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**
 
+- [Building](#building)
+  - [Maven](#maven)
+  - [Eclipse](#eclipse)
+- [Running](#running)
 - [Development](#development)
   - [Project folders](#project-folders)
   - [Workflow](#workflow)
