@@ -35,7 +35,7 @@ This is the xtext grammar that will be used to generate the Ecore model:
 
 This is the model generated from the xtext grammar:
 
-![ecore-model](docs/ecore-model.png)
+<img src="./docs/ecore-model.png" alt="ecoremodel" width="500"/>
 
 The model consists of the main `Nginx` consisting of any number of sites. The sites themselves contain a number of attributes, and two EClasses: `SSlCert` and `ErrorPage`.
 
