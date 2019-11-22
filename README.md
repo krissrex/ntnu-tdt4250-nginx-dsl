@@ -11,6 +11,31 @@ Nginx config DSL for NTNU course TDT4250.
 
 ---
 
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Semester project - TDT4250: Advanced Software Design](#semester-project---tdt4250-advanced-software-design)
+      - [Participants:](#participants)
+  - [Building](#building)
+    - [Maven](#maven)
+    - [Eclipse](#eclipse)
+  - [Running](#running)
+  - [Project folders](#project-folders)
+  - [Workflow](#workflow)
+  - [Grammar](#grammar)
+  - [Ecore Model](#ecore-model)
+  - [Converting .nginx to .conf](#converting-nginx-to-conf)
+  - [Writing new .nginx files](#writing-new-nginx-files)
+  - [Tests](#tests)
+    - [Validators](#validators)
+    - [Running the tests](#running-the-tests)
+  - [Helpful links](#helpful-links)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+---
+
 ## Building
 
 ### Maven
