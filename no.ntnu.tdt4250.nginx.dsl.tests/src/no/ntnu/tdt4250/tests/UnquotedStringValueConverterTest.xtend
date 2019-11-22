@@ -1,8 +1,8 @@
 package no.ntnu.tdt4250.tests
 
 import no.ntnu.tdt4250.converter.UnquotedStringValueConverter
-import static org.junit.Assert.assertEquals
 import org.junit.jupiter.api.Test
+import static org.junit.jupiter.api.Assertions.assertEquals
 
 class UnquotedStringValueConverterTest {
 	
@@ -11,7 +11,7 @@ class UnquotedStringValueConverterTest {
 		val converter = new UnquotedStringValueConverter()
 		val actual = converter.toValue('"I have double quotes"', null)
 		
-		assertEquals("Does not remove double quotes", 'I have double quotes', actual)
+		assertEquals('I have double quotes', actual, "Does not remove double quotes")
 	}
 	
 	@Test
@@ -19,7 +19,7 @@ class UnquotedStringValueConverterTest {
 		val converter = new UnquotedStringValueConverter()
 		val actual = converter.toValue("'I have single quotes'", null)
 		
-		assertEquals("Does not remove single quotes", "I have single quotes", actual)
+		assertEquals("I have single quotes", actual, "Does not remove single quotes")
 	}
 
 }

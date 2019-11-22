@@ -24,6 +24,6 @@ jobs:
         args: clean test
     - name: CI (offline)
       uses: krissrex/action-maven-cli@1.1.1-jre11
-      if: steps.maven-cache.outputs.cache-hit = 'true'
+      if: steps.maven-cache.outputs.cache-hit == 'true'
       with:
         args: --offline clean test
