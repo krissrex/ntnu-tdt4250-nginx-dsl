@@ -6,15 +6,16 @@ Nginx config DSL for NTNU course TDT4250
 
 ## Project folders
 
-| Folder name | Description                                                                                           |
-| ----------- | ----------------------------------------------------------------------------------------------------- |
-| .generator  | Acceleo model-to-text                                                                                 |
-| .dsl        | The grammar definition and all language-specific components (parser, lexer, linker, validation, etc.) |
-| .ide        | Platform-independent IDE functionality (e.g. services for content assist)                             |
-| .target     | no idea, xtext. Possibly maven stuff.                                                                 |
-| .tests      | xtext tests                                                                                           |
-| .ui         | xtext ui                                                                                              |
-| .ui.tests   | Unit tests for the Eclipse editor                                                                     |
+| Folder name   | Description                                                                                           |
+| ------------- | ----------------------------------------------------------------------------------------------------- |
+| .generator    | Acceleo model-to-text                                                                                 |
+| .generator.ui | Acceleo Launcher UI project                                                                        |
+| .dsl          | The grammar definition and all language-specific components (parser, lexer, linker, validation, etc.) |
+| .ide          | Platform-independent IDE functionality (e.g. services for content assist)                             |
+| .target       | no idea, xtext. Possibly maven stuff.                                                                 |
+| .tests        | xtext tests                                                                                           |
+| .ui           | xtext ui                                                                                              |
+| .ui.tests     | Unit tests for the Eclipse editor                                                                     |
 
 ## Workflow
 
@@ -35,11 +36,13 @@ This is the xtext grammar that will be used to generate the Ecore model:
 
 This is the model generated from the xtext grammar:
 
-<img src="./docs/ecore-model.png" alt="ecoremodel" width="500"/>
+<img src="./docs/model.png" alt="ecoremodel" width="500"/>
 
-The model consists of the main `Nginx` consisting of any number of sites. The sites themselves contain a number of attributes, and two EClasses: `SSlCert` and `ErrorPage`.
+The model consists of the main `Nginx` consisting of any number of sites. The sites themselves contain a number of attributes, and two EClasses: `SslCert` and `ErrorPage`.
 
 The sites can have several `alternative names` and several `error pages`. The error pages contain a list of `error codes` that link to a specific `uri`. Each site has a `SSL Certifiate` that can be reused for other domains or subdomains.
+
+The model also keeps track of other referenced nginx-files in the includes attributes. All sites in those files can be referenced by inheriting from them.
 
 ## Conversion
 
