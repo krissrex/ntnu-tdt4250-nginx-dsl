@@ -63,7 +63,7 @@ To write new `.nginx` files you want to utilize the features of xtext such as au
 2. Create a new Java Project
 3. Create `.nginx` files and enjoy the autocomplate and validation inside the editor
 
-<img src="./docs/nginx-ide.png" alt="nginx-ide" width="500"/>
+<img src="./docs/nginx-ide.png" alt="nginx-ide"/>
 
 ## Tests
 
