@@ -42,6 +42,9 @@ server {
 	[if (getTemplate(site) <> null and getTemplate(site).startsWith('php'))]
 	[php(site)/]
 	[/if]
+	
+	[comment TODO gzip, include, index /]
+
 }
 
 

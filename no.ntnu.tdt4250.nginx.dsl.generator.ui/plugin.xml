@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="true"
+            objectClass="org.eclipse.core.resources.IFile"
+            nameFilter="*.nginx"
+            id="no.ntnu.tdt4250.nginx.dsl.generator.ui.popupMenus.contribution.IFile">
+         <menu id="org.eclipse.acceleo.module.menu" label="Acceleo Model to Text" path="additionsAcceleo">
+               <groupMarker name="acceleo"/> 
+         </menu>
+         <action
+               class="no.ntnu.tdt4250.nginx.dsl.generator.ui.popupMenus.AcceleoGeneratenginxconfigurationfilegeneratorAction"
+               enablesFor="+"
+               id="no.ntnu.tdt4250.nginx.dsl.generator.ui.popupMenus.acceleoGeneratenginxconfigurationfilegeneratorAction"
+               icon="icons/default.gif"
+               label="Generate nginx configuration file generator"
+               menubarPath="org.eclipse.acceleo.module.menu/acceleo"/>
+      </objectContribution>
+   </extension>
+</plugin>
