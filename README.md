@@ -4,6 +4,45 @@
 
 Nginx config DSL for NTNU course TDT4250
 
+---
+
+## Building
+
+### Maven
+
+`mvn clean package`
+
+### Eclipse
+
+1. Import all sub-projects into eclipse
+2. Run the `.dsl/src/*/GenerateNginx.mwe2` as a workflow (right click it -> Run as)
+
+## Running
+
+To start the IDE for writing DSL: 
+
+1. Build in eclipse
+2. Right-click `.ide` and Run as: `Eclipse Application`
+3. Open the example project in `examples\example.nginx.mywebsite` in this new eclipse, or create a new project
+4. Create a `.nginx` file
+5. Start writing.
+
+To generate a config:
+
+1. Build in eclipse
+2. Find `generate.mtl` in `.generator/src/*/main/generate.mtl`.
+3. Right click `generate.mtl` and Run as: `Launch Acceleo application`
+4. Edit the run configuration:
+  1. Project: `no.ntnu.tdt4250.nginx.dsl.generator`
+  2. Main class: `no.ntnu.tdt4250.nginx.dsl.generator.main.Generate`
+  3. Model: *your .nginx file you created* (or the example file: `/no.ntnu.tdt4250.nginx.dsl.generator/src/no/ntnu/tdt4250/nginx/dsl/generator/main/mysite.no.nginx`)
+  4. Target: an output folder for generated files, like `/no.ntnu.tdt4250.nginx.dsl.generator/target/generated-nginx-mysite`
+  5. Configuration > Runner: `Java Application`
+5. Apply and Run
+  * If it says the configuration does not exist, just try to run it again
+
+---
+
 ## Project folders
 
 | Folder name   | Description                                                                                           |
@@ -82,6 +121,10 @@ These validators then validate the model and throws an error if something is inc
 ### Running the tests
 
 Right click on the `no.ntnu.tdt4250.tests` project and select `Run as -> JUnit Test`
+
+Alternatively, use `mvn test` (or `mvn --offline test` to skip downloading dependencies/p2 indexes)
+
+---
 
 ## Helpful links
 
