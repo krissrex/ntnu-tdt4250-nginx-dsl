@@ -41,7 +41,26 @@ The model consists of the main `Nginx` consisting of any number of sites. The si
 
 The sites can have several `alternative names` and several `error pages`. The error pages contain a list of `error codes` that link to a specific `uri`. Each site has a `SSL Certifiate` that can be reused for other domains or subdomains.
 
-## Conversion
+## Converting .nginx to .conf
+
+1. Right click the `GenerateNginx.mwe2` inside `no.ntnu.tdt4250.nginx.dsl` and select `Run as -> MWE2 Workflow`
+2. Right click the `generate.mtl` inside `no.ntnu.tdt4250.nginx.dsl.generator` and select `Run Configurations...`. Make sure the `.mtl` is updated. If it shows an error, change something (like add a space) and save again to refresh it. Use the following run coniguration:
+
+<img src="./docs/run-config.png" alt="runconfig" width="500"/>
+
+3. You can change the `example.nginx` to whatever `.nginx` file you want. The result is shown below:
+
+[INSERT IMAGE OF BEFORE AND AFTER CONVERSION]
+
+## Writing new .nginx files
+
+To write new `.nginx` files you want to utilize the features of xtext such as autocompletion and error handling. This is done by starting a new eclipse project.
+
+1. Right click the `no.ntnu.tdt4250.nginx.dsl.ui` project and select `Run as -> Eclipse Application`
+2. Create a new Java Project
+3. Create `.nginx` files and enjoy the autocomplate and validation inside the editor
+
+<img src="./docs/nginx-ide.png" alt="nginx-ide" width="500"/>
 
 ## Tests
 
