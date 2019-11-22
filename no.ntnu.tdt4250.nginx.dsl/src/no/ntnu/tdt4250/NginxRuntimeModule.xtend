@@ -5,6 +5,8 @@ package no.ntnu.tdt4250
 
 import no.ntnu.tdt4250.converter.NginxValueConverter
 import org.eclipse.xtext.conversion.IValueConverterService
+import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy
+import org.eclipse.xtext.scoping.IGlobalScopeProvider
 
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
@@ -13,6 +15,12 @@ class NginxRuntimeModule extends AbstractNginxRuntimeModule {
 	
 	override Class<? extends IValueConverterService> bindIValueConverterService() {
 		return NginxValueConverter
+	}
+	def Class<? extends IDefaultResourceDescriptionStrategy> bindIDefaultResourceDescriptionStrategy() {
+ 		NginxResourceDescriptionStrategy
+ 	}
+ 	override Class<? extends IGlobalScopeProvider> bindIGlobalScopeProvider() {
+		NginxGlobalScopeProvider;
 	}
 	
 }
