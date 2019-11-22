@@ -1,8 +1,13 @@
-# ntnu-tdt4250-nginx-dsl
+# Semester project - TDT4250: Advanced Software Design
 
 [![Hits-of-Code](https://hitsofcode.com/github/krissrex/ntnu-tdt4250-nginx-dsl)](https://hitsofcode.com/view/github/krissrex/ntnu-tdt4250-nginx-dsl)
 
-Nginx config DSL for NTNU course TDT4250
+Nginx config DSL for NTNU course TDT4250. 
+#### Participants: 
+- Kristian Rekstad
+- Morten Stulen
+- Johannes Røsvik
+- Jonas Geschke
 
 ## Project folders
 
@@ -112,4 +117,4 @@ Right click on the `no.ntnu.tdt4250.tests` project and select `Run as -> JUnit T
 - https://gitlab.stud.idi.ntnu.no/TDT4250/examples/tree/master/tdt4250.ra.xtext2
 - Whitespace-aware languages: https://www.eclipse.org/Xtext/documentation/307_special_languages.html
 - Testing https://www.eclipsecon.org/france2015/sites/default/files/slides/presentation.pdf (there is also a video on this)
-- Terminals VS data types https://zarnekow.blogspot.com/2012/11/xtext-corner-6-data-types-terminals-why.html
+- terminals vs data types https://zarnekow.blogspot.com/2012/11/xtext-corner-6-data-types-terminals-why.html
