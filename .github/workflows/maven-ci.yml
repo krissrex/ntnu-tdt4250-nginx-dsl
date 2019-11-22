@@ -16,7 +16,7 @@ jobs:
         # A directory to store and save the cache
         path: ~/.m2
         # An explicit key for restoring and saving the cache
-        key: ${{ runner.os }}-${{ hashFiles('**/*.pom') }}
+        key: ${{ runner.os }}-${{ hashFiles('**/pom.xml') }}
     - name: GitHub Action for Maven
       uses: LucaFeger/action-maven-cli@1.1.0
       with:
