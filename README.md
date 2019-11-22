@@ -123,11 +123,11 @@ The model also keeps track of other referenced nginx-files in the includes attri
 
 ### Validators
 
-There are three validators `NginxValidator`, `NginxSslValidator` and `NginxErrorValidator` corresponding to the model: `Site`, `SslCert` and `ErrorPage`.
+There are three validators `NginxValidator`, `NginxSslValidator`, `NginxErrorValidator` and `NginxIncludeValidator` corresponding to the model: `Site`, `SslCert`, `ErrorPage` and `Include`.
 
 The main validator uses "composed checks" to include the two others:
 
-`@ComposedChecks(validators = #[NginxSslValidator, NginxErrorValidator])`
+`@ComposedChecks(validators = #[NginxSslValidator, NginxErrorValidator, NginxIncludeValidator])`
 
 These validators then validate the model and throws an error if something is incorrect in the input. Every field in the model is checked and validated - mostly through regex.
 
