@@ -21,7 +21,7 @@ class NginxIncludeValidator extends AbstractDeclarativeValidator {
 		
 		if (!file.exists) {
 			error(
-				'Include is not valid. File ' + file.fullPath + ' not found. Platform ' + platformString,
+				'Include is not valid. File ' + file.fullPath + ' not found.',
 				NginxPackage.Literals.INCLUDE__IMPORT_URI,
 				INVALID_INCLUDE
 			)
