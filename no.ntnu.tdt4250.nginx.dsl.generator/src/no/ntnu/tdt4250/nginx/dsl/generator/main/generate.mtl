@@ -29,6 +29,10 @@ server {
 	[if (hasRoot(site))]
 	root [site.root/];
 
+	[if (site.logName <> null)]
+	access_log [site.logName/];
+	[/if]
+
 	location / {
 		try_files $uri $uri/ =404;
 	}
