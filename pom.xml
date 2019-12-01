@@ -7,7 +7,7 @@
 	<packaging>pom</packaging>
 
 	<properties>
-		<xtextVersion>2.18.0.M3</xtextVersion>
+		<xtextVersion>2.18.0</xtextVersion>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>11</maven.compiler.source>
 		<maven.compiler.target>11</maven.compiler.target>
@@ -278,11 +278,6 @@
      <repository>
        <id>Eclipse - Acceleo Release</id>
        <url>https://repo.eclipse.org/content/repositories/acceleo-releases</url>
-     </repository>
-     <repository>
-       <id>eclipse-platform</id>
-       <layout>p2</layout>
-       <url>${eclipse-site}</url>
      </repository>
 	</repositories>
 
