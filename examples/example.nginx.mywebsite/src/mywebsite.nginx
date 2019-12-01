@@ -15,3 +15,8 @@ mysite.com
 	template: php5.6
 	error_page: 500 501 "/50x.html"
 	error_page:404 "/404.html"
+
+qore.no
+www.qore.no:
+	port: 3000
+	log_name: "/var/log/qore.no.access.log"

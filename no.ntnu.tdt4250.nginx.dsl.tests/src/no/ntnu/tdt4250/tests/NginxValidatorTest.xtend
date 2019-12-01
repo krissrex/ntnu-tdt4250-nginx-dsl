@@ -63,9 +63,28 @@ class NginxValidatorTest {
 			}
 		}
 		result.assertNoErrors
-		
 	}
 
+	@Test
+	def void testLogName() {
+		val input = '''
+			mycoolsite.com:
+			  port: 3000
+			  log_name: "/var/log/nginx/file.access.log"
+		'''
+		val result = input.parse
+		val issues = resourceValidator.validate(result.eResource, CheckMode.ALL, CancelIndicator.NullImpl)
+
+		for (issue : issues) {
+			switch issue.severity {
+				case ERROR:
+					println("ERROR: " + issue.message)
+				case WARNING:
+					println("WARNING: " + issue.message)
+			}
+		}
+		result.assertNoErrors
+	}
 
 	/** maps the <=> 'spaceship' operator to Assert.assertEquals
 	 * 

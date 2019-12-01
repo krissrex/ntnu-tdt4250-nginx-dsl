@@ -66,6 +66,14 @@ class NginxProposalProvider extends AbstractNginxProposalProvider {
 		}
 	}
 	
+	override void completeSite_LogName(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		super.completeSite_LogName(model, assignment, context, acceptor)
+		
+		if (model instanceof Site) {
+			acceptor.accept(createCompletionProposal('"/var/log/'+model.name + '.access.log"', context))
+		}
+	}
+	
 	
 	override void completeSite_Port(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		super.completeSite_Port(model, assignment, context, acceptor)

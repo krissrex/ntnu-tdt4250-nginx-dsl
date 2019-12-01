@@ -128,7 +128,7 @@ class NginxValidator extends AbstractNginxValidator {
 	def void checkLogName(String logName) {
 		if (logName !== null) {
 			// Absolute file path
-			val foundMatch = checkRegex(logName, "^\\/[a-zA-Z0-9-]+([\\/][a-zA-Z0-9-]*)*\\.log$")
+			val foundMatch = checkRegex(logName, "^\\/[.a-zA-Z0-9-]+([\\/][.a-zA-Z0-9-]*)*\\.log$")
 
 			// File name
 			//val foundMatch = checkRegex(logName, "^[a-zA-Z0-9-_.]+\\.log$")
