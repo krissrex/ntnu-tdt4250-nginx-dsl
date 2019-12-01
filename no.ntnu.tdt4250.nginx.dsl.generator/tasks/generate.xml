@@ -6,43 +6,6 @@
     <!-- The classpath with only the dependencies used by the project -->
     <path id="no.ntnu.tdt4250.nginx.dsl.generator.libraryclasspath">
         <pathelement location="${ECLIPSE_WORKSPACE}/no.ntnu.tdt4250.nginx.dsl.generator/bin"/>
-        <pathelement location="${ECLIPSE_HOME}/plugins/org.eclipse.core.runtime_3.16.0.v20190823-1314.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/plugins/org.eclipse.osgi_3.15.0.v20190830-1434.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/plugins/org.eclipse.osgi.compatibility.state_1.1.600.v20190814-1451.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/plugins/org.eclipse.equinox.common_3.10.500.v20190815-1535.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/plugins/org.eclipse.core.jobs_3.10.500.v20190620-1426.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/plugins/org.eclipse.equinox.registry_3.8.500.v20190714-1850.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/plugins/org.eclipse.equinox.preferences_3.7.500.v20190815-1535.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/plugins/org.eclipse.core.contenttype_3.7.400.v20190624-1144.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/plugins/org.eclipse.equinox.app_1.4.300.v20190815-1535.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/plugins/org.eclipse.emf.ecore_2.19.0.v20190822-1451.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/plugins/org.eclipse.emf.common_2.16.0.v20190625-1131.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/plugins/org.eclipse.emf.ecore.xmi_2.16.0.v20190528-0725.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/plugins/org.eclipse.ocl_3.10.400.v20190910-0937.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/plugins/lpg.runtime.java_2.0.17.v201004271640.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/plugins/org.eclipse.ocl.common_1.8.400.v20190910-0937.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/plugins/org.eclipse.ocl.ecore_3.14.0.v20190910-0937.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/plugins/org.eclipse.acceleo.common_3.7.8.201902261618.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/plugins/org.eclipse.acceleo.model_3.7.8.201902261618.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/plugins/org.eclipse.acceleo.profiler_3.7.8.201902261618.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/plugins/org.eclipse.acceleo.engine_3.7.8.201902261618.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/plugins/org.eclipse.emf.codegen.ecore_2.19.0.v20190822-1451.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/plugins/org.eclipse.emf.codegen_2.19.0.v20190821-1536.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/plugins/com.google.guava_27.1.0.v20190517-1946.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/plugins/org.eclipse.xtext.xbase.lib_2.19.0.v20190902-0728.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/plugins/org.eclipse.xtend.lib_2.19.0.v20190902-0728.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/plugins/org.eclipse.xtend.lib.macro_2.19.0.v20190902-0728.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/plugins/com.google.inject_3.0.0.v201605172100.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/plugins/com.google.inject.assistedinject_3.0.0.v201402270930.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/plugins/com.google.inject.multibindings_3.0.0.v201605172100.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/plugins/org.eclipse.xtext_2.19.0.v20190902-0737.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/plugins/org.antlr.runtime_3.2.0.v201101311130.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/plugins/org.eclipse.emf.mwe.core_1.5.0.201906111547.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/plugins/org.apache.commons.cli_1.2.0.v201404270220.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/plugins/org.eclipse.emf.mwe2.runtime_2.11.0.201906111547.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/plugins/org.eclipse.emf.mwe.utils_1.5.0.201906111547.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/plugins/org.eclipse.xtext.util_2.19.0.v20190902-0737.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/plugins/javax.inject_1.0.0.v20091030.jar"/>
     </path>
 
     <path id="no.ntnu.tdt4250.nginx.dsl.generator.classpath">
