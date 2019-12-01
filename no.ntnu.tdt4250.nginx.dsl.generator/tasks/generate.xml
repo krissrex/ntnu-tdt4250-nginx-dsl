@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project default="generate" name="no.ntnu.tdt4250.nginx.dsl.generator">
-    <property name="ECLIPSE_HOME" value="../../../../AppData/Local/Eclipse/eclipse-dsl-2019-06-R-win32-x86_64/eclipse"/>
-    <property name="ECLIPSE_WORKSPACE" value="../.."/>
+    <property name="ECLIPSE_HOME" value="../../../../../../../Applications/Eclipse.app/Contents/Eclipse"/>
+    <property name="ECLIPSE_WORKSPACE" value="../../../eclipse"/>
 
     <!-- The classpath with only the dependencies used by the project -->
     <path id="no.ntnu.tdt4250.nginx.dsl.generator.libraryclasspath">

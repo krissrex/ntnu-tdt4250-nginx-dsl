@@ -1,5 +1,6 @@
-mywebsite.com
-www.mywebsite.com:
+INCLUDE "myother.nginx"
+
+mywebsite.com www.mywebsite.com from myother.no:
 	port: 8080
 	ssl_certificate: "/etc/file"
 	ssl_certificate_key: "/etc/file"
@@ -8,9 +9,7 @@ www.mywebsite.com:
 	https_redirect: true
 	error_page: 500 501 "/50x.html"
 
-default
-mysite.com
-*.mysite.com:
+default mysite.com *.mysite.com:
 	root: "/var/www/html"
 	template: php5.6
 	error_page: 500 501 "/50x.html"
@@ -20,3 +19,5 @@ qore.no
 www.qore.no:
 	port: 3000
 	log_name: "/var/log/qore.no.access.log"
+	error_page: 404 "/404.html"
+	

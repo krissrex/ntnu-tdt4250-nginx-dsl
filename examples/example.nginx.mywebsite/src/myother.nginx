@@ -1,0 +1,5 @@
+myother.no: 
+	port: 9090
+	gzip: true
+	error_page: 500 501 "/50x.html"
+	error_page: 404 "/404.html"
