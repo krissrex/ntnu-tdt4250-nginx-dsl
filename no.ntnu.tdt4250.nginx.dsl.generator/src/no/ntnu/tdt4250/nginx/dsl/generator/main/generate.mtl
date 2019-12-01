@@ -121,10 +121,7 @@ location / {
 
 [template public servernames(site: Site)]
 # sitename
-server_name: [site.name/];
-[for (alternative: String | site.alternativeNames)]
-server_name: [alternative/];
-[/for]
+server_name: [site.name/][for (alternative: String | site.alternativeNames)] [alternative/][/for];
 [/template]
 
 [template public error_pages(site: Site)]
@@ -183,3 +180,4 @@ gzip_types text/plain text/css application/json application/x-javascript text/xm
 	else site.gzip
 	endif
 /]
+

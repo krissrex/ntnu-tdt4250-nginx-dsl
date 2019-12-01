@@ -9,3 +9,8 @@ mysite.no from site.no:
   https_redirect: true
   template: php7.2 
   gzip: true
+  
+qore.no
+www.qore.no:
+	port: 3000
+	log_name: "/var/log/qore.no.access.log"
