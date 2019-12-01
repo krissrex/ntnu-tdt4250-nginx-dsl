@@ -201,3 +201,33 @@ To write new `.nginx` files you want to utilize the features of xtext such as au
 
 <img src="./docs/nginx-ide.png" alt="nginx-ide"/>
 
+#### Available directives
+Following nginx directives are available in our custom DSL: 
+ * `port` (Number): Specifies a from which the website should grab its content (same as in nginx conf)
+ * `root` (FilePath): Specifies a root directory from which the website should grab its content (same as in nginx conf)
+ * `log_name` (FileName): Defines the name of the log-file. 
+ * `template`: Defines what template should used (currently `php7.2` and `php5.6` are available)
+ * `include`: 
+ * `https_redirect` (Boolean):  Flag, if http traffic should be redirected to HTTPS.
+ * SSL:
+    * `ssl_certificate` (FilePath): Defines which  SSL certificate should be used for HTTPS.
+    * `ssl_certificate` (FilePath): Defines the key for the Certificate.
+    * `ssl_dhparam` (FilePath): Defines the DHParam for SSL. 
+ * `error_page` (Number+ FileName): Defines the displayed file for http errors (same as in nginx conf)
+ * `gzip` (Boolean): Flag, if the response should be gziped.
+
+ #### Additional Features
+ * Using the `default` directive as a website name will create a default nginx config.
+ ```nginx
+default:
+  port: 8080
+ ```
+ * Include other nginx configurations to reference them. With the `from` directive you can inherit a configuration and extend them.
+ ```nginx
+INCLUDE "othersite.nginx"
+
+mysite.no from othersite.no: 
+  port: 9090
+  error_page: 500 501 /50x.html
+```
+

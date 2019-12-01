@@ -15,9 +15,6 @@ Include:
     'INCLUDE' importURI=STRING
 ;
 
-// TODO add an include?
-// TODO add reference in itself
-// TODO maybe add location directive? 
 Site: 
 	name=(SiteName|'default')
 	alternativeNames+=WildCardedSiteName* 
